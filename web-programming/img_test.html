@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .required::before {
+        display: inline-block;
+        content: "*";
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 200px; border: 1px solid red">
+      <figure>
+        <img
+          src="img/hansot_kit.jpg"
+          alt="한솥이미지"
+          height="auto"
+          width="100%"
+        />
+      </figure>
+    </div>
+    <figcaption>한솥구미금오공대점</figcaption>
+
+    <h1>텍스트 링크 만들기</h1>
+    <p><a href="https://ko-kr.facebook.com/">페이스북(현재화면에서 열기)</a></p>
+    <p>
+      <a href="https://twitter.com/?lang=ko" target="_blank"
+        >트위터(새 창 또는 새 탭)</a
+      >
+    </p>
+    <p>
+      <a href="https://twitter.com/?lang=ko" target="_blank"
+        ><img
+          src="https://kr.seaicons.com/wp-content/uploads/2015/06/twitter-icon.png"
+      /></a>
+    </p>
+    <hr />
+    <figure>
+      <a href="https://www.hsd.co.kr/menu/menu_list " target="_blank">
+        <img src="img/honsot_menu.jpg" alt="한솥메뉴" />
+      </a>
+    </figure>
+    <figcaption>
+      가격 이상의 <span style="color: blue">가치</span>가 담긴 다양한 메뉴를
+      확인해 보세요
+    </figcaption>
+    <hr />
+    <form action="#" method="post">
+      <fieldset style="width: max-content">
+        <legend>개인정보</legend>
+        <label for="user-id">아이디</label>
+        <input type="text" id="user-id" />
+        <label>비밀번호 <input type="text" /></label> <br />
+        <textarea name="" id="" cols="30" rows="10"></textarea>
+
+        <input type="submit" value="검색" />
+      </fieldset>
+    </form>
+    <hr />
+    <fieldset style="text-align: end; width: fit-content">
+      <legend>로그인정보</legend>
+      <label for="user-id">아이디</label>
+      <input type="email" id="user-id" />
+      <br />
+      <label for="user-pwd">비밀번호</label>
+      <input type="password" id="user-pwd" />
+      <br />
+      <label for="user-pwd-check">비밀번호 확인</label>
+      <input type="password" id="user-pwd-check" />
+    </fieldset>
+    <hr />
+    <form action="#">
+      <fieldset>
+        <legend>소프트웨어공학과 졸업여행</legend>
+        <label><input type="radio" name="site-radio" value="jeju" />제주</label>
+        <label
+          ><input type="radio" name="site-radio" value="danang" />다낭</label
+        >
+        <label
+          ><input type="radio" name="site-radio" value="jeju" />시드니</label
+        >
+      </fieldset>
+      <fieldset>
+        <legend>저녁메뉴는?</legend>
+        <label
+          >소고기<input type="checkbox" name="dinner-select" value="dinner1"
+        /></label>
+        <label
+          >보쌈<input type="checkbox" name=" dinner-select " value="dinner2"
+        /></label>
+        <label
+          >김치찌개<input type="checkbox" name=" dinner-select" value="dinner3"
+        /></label>
+        <label
+          >삼겹살<input type="checkbox" name=" dinner-select" value="dinner4"
+        /></label>
+      </fieldset>
+      <fieldset>
+        <legend>신청자</legend>
+        <label class="required">이름<input type="text" /></label>
+        <label>학번<input type="text" placeholder="하이픈없이입력" /></label>
+        <label>학년<input type="number" readonly value="1" /></label>
+      </fieldset>
+      <input type="submit" value="제출" />
+      <input type="reset" value="다시작성" />
+    </form>
+    <hr />
+    <select value="class-select">
+      <option value="archi">건축공학과</option>
+      <option value="mechanic">기계공학과</option>
+      <option value="indust">산업공학과</option>
+      <option value="elec">전기전자공학과</option>
+      <option value="computer" selected>컴퓨터소프트웨어공학과</option>
+      <option value="chemical">화학공학과</option>
+    </select>
+    <hr />
+    <div>
+      <p>
+        <a href="https://www.kumoh.ac.kr/ko/index.do" target="_blank">
+          <img
+            src="data:image/png;base64,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"
+            alt="금오공대로고"
+        /></a>
+      </p>
+    </div>
+
+    <h1>금오공과대학교 가족회사 가입신청서</h1>
+    <fieldset style="width: max-content">
+      <legend>기업현황</legend>
+      <div>
+        <label><strong>회사명</strong><input type="text" /></label>
+        <label><strong>대표자</strong><input type="text" /></label>
+        <label><input type="radio" name="mw" />남</label>
+        <label><input type="radio" name="mw" />여</label>
+      </div>
+      <div>
+        <label
+          ><strong>사업자 번호</strong
+          ><input type="text" placeholder="NNN-NN-NNNN"
+        /></label>
+        <label><strong>창업일</strong><input type="date" /></label>
+      </div>
+      <div>
+        <label><strong>주소</strong><input type="text" /></label>
+        <label><strong>전화번호</strong><input type="tel" /></label>
+      </div>
+      <div>
+        <label><strong>홈페이지</strong><input type="text" /></label>
+      </div>
+      <div>
+        <label><strong>근무시간</strong><input type="time" /></label>
+        <label> ~ <input type="time" /></label>
+      </div>
+      <div>
+        <label><strong>기업형태</strong></label>
+        <label>대기업<input type="radio" name="company" /></label>
+        <label>중견기업<input type="radio" name="company" /></label>
+        <label>중소기업<input type="radio" name="company" /></label>
+      </div>
+      <div>
+        <label
+          ><strong>전년도매출액</strong><input type="text" placeholder="백만원"
+        /></label>
+      </div>
+    </fieldset>
+    <fieldset style="width: max-content">
+      <legend>가입내용</legend>
+      <div>
+        <label><strong>구분(연회비)</strong></label>
+        <label>1st(100만원)<input type="radio" name="money" /></label>
+        <label>2nd(60만원)<input type="radio" name="money" /></label>
+        <label>3rd(30만원)<input type="radio" name="money" /></label>
+        <label>4th(무료)<input type="radio" name="money" /></label>
+      </div>
+      <div>
+        <label><strong>멘토교수</strong></label>
+        <label
+          >학과
+          <select value="class-select">
+            <option value="archi">건축공학과</option>
+            <option value="mechanic">기계공학과</option>
+            <option value="indust">산업공학과</option>
+            <option value="elec">전기전자공학과</option>
+            <option value="computer" selected>컴퓨터소프트웨어공학과</option>
+            <option value="chemical">화학공학과</option>
+          </select></label
+        >
+        <label>성명 <input type="text" /></label>
+        <hr />
+        <div>
+          <label><strong>산학협력희망분야</strong></label>
+        </div>
+        <div>
+          <label
+            >기술개발<input
+              type="checkbox"
+              name="field-select"
+              value="기술개발"
+          /></label>
+          <label
+            >기술지도<input
+              type="checkbox"
+              name="field-select "
+              value="기술지도"
+          /></label>
+          <label
+            >현장실습<input
+              type="checkbox"
+              name=" field-select"
+              value="현장실습"
+          /></label>
+        </div>
+        <div>
+          <label
+            >재직자교육<input
+              type="checkbox"
+              name="field-select "
+              value="기술지도"
+          /></label>
+          <label
+            >공용장비활용<input
+              type="checkbox"
+              name=" field-select"
+              value="현장실습"
+          /></label>
+          <label>기타 <input type="text" /></label>
+        </div>
+      </div>
+    </fieldset>
+    <div>
+      <input type="submit" value="제출하기" />
+      <input type="reset" value="다시입력" />
+    </div>
+  </body>
+</html>
