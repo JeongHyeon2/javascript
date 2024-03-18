@@ -1,0 +1,25 @@
+.outer div {
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    background-color: aquamarine;            
+    border: solid black 1px;
+}
+.box2{
+    font-size: 2rem;
+    vertical-align: top;
+}
+ul{
+    
+    list-style-type: none;
+}
+li{
+    line-height: 30px; 
+    text-align: center;
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+    width: 100px;
+    height: 30px;
+    float: left;
+}

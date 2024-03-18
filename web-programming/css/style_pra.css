@@ -1,0 +1,73 @@
+.ul-sector{
+background-color: #F6F6F6;
+color: #757575;
+list-style-type: none;
+width: 300px;
+}
+.li-sector:hover{
+    background-color: #FF8D3F;
+    color: #FFFFFF;
+}
+.current-page{
+    color: #FF8D3F;
+}
+.btn-search{
+    background-color: #339AF0;
+    color: #FFFFFF;
+}
+.btn-search:hover{
+    background-color: #2c44f3;
+}
+.search-bar:focus{
+    background-color:  #c8def0 ;
+}
+.table-head{
+    background-color: #056186;
+    color: #FFFFFF;
+}
+.table-body{
+    border-collapse: collapse;
+
+}
+.table-body> tr:nth-child(2n) {
+    background: #e0e0e0;
+    color: black;
+  }
+.table-body>tr:hover{
+color: #056186;
+}
+.page-selector>a{
+    border-style: hidden;
+}
+.page-selector>a:hover{
+    color: #339AF0;
+}
+.red-text{
+    color: #B22222;
+}
+.green-text{
+    color: #228b22;
+}
+.blue-text{
+    color: #0066B3;
+}
+.orange-text{
+    color: #ff8000;
+}
+.page-selector>a{
+    border: 1px solid #000000;
+}
+.box{
+    width: 300px;
+    height: 100px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    display: table;
+}
+.box .inner-box{
+    display: table-cell;
+    vertical-align: middle;
+
+}
+
