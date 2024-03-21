@@ -1,0 +1,21 @@
+body{
+    border: 1px solid black;
+}
+div{
+    width: 200px;
+    height: 200px;
+}
+div.box1{
+    background-color: red;
+    position: absolute;
+    top: 250px;
+}
+div.box2{
+    background-color: yellow;
+}
+.container{
+    width: 500px;
+    height: 500px;
+    background-color: green;
+    position: relative;
+}

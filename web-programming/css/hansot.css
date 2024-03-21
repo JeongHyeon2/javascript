@@ -1,0 +1,57 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  a:visited {
+    color: black;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+
+  .gnb_menu > ul > li{
+float: left;  
+}
+  .logo{
+    margin-left: 50px;
+    margin-right: 100px;
+    vertical-align: top;
+    height: 90px;
+    border: solid 1px black;
+    line-height: 90px;
+    display: inline-block
+  }
+  .gnb_menu{
+    display: inline-block
+  } 
+
+  .dp1 {
+    text-align: center;
+    width: 100px;
+    height: 90px;
+    border: solid 1px black;
+    display: inline-block;
+    line-height: 90px;
+  }
+  .hd_content{
+    border: 1px solid black;
+    height: 90px;
+    width: 1000px;
+    margin: 0 auto;
+  }
+  .dp1 a{
+    display: inline-block;
+    height: 90px;
+  }
+  .dp1 a:hover{
+    color: #f6ca00;
+
+  }
