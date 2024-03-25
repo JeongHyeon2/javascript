@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+  .container {
+    display: flex;
+    background-color: yellowgreen;
+    border: 2px solid red;
+    flex-wrap: wrap;
+    width: 1200px;
+    height: 200px;
+  }
+  
+  .item {
+    width: 200px;
+    background-color: aquamarine;
+    opacity: 0.5;
+    border: 2px solid black;
+    font-size: 2rem;
+    overflow: ellipsis;
+  }
+  .outer{
+    background-color: black;
+    flex-wrap: wrap;
+    display: flex;
+    height: 500px;
+  }
+  
