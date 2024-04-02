@@ -1,0 +1,32 @@
+.layout{
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0;
+}
+.flexbox{
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+.item{
+    height: 150px;
+    flex-basis: 200px;
+}
+.flexbox :nth-child(1){
+    background-color: aqua;
+}
+.flexbox :nth-child(2){
+    background-color: bisque;
+}
+.flexbox :nth-child(3){
+    background-color: blueviolet;
+}
+.flexbox :nth-child(4){
+    background-color: yellow;
+}
+.item:nth-child(1){flex-shrink: 1;}
+.item:nth-child(2){flex-shrink: 1;}
+.item:nth-child(3){flex-shrink: 1;}
+.item:nth-child(4){flex-shrink: 1;}

@@ -1,0 +1,29 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/interactive.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Responsive Flexbox</h1>
+    <p>Window height: <span id="height"></span></p>
+    <p>Window width: <span id="width"></span></p>
+    <div class="container">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+    </div>
+  </body>
+  <script>
+    const heightOutput = document.querySelector("#height");
+    const widthOutput = document.querySelector("#width");
+
+    function reportWindowSize() {
+      heightOutput.textContent = window.innerHeight;
+      widthOutput.textContent = window.innerWidth;
+    }
+
+    window.onresize = reportWindowSize;
+  </script>
+</html>

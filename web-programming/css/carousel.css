@@ -1,39 +1,38 @@
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    list-style-type: none;
-  }
-  body {
-    background-color: #eeecec;
-  }
-  .carousel {
-    display: inline-block;
-    width: 300px;
-    height: 360px;
-    margin: 0 auto;
-    background-image: url(../img/box_model_img2.jpg);
-    background-size:300px 360px;    
-    background-repeat: no-repeat;
-    position: relative;
-  }
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+body {
+  background-color: #eeecec;
+}
+.carousel {
+  display: inline-block;
+  width: 300px;
+  height: 360px;
+  margin: 0 auto;
+  background-image: url(../img/box_model_img2.jpg);
+  background-size:300px 360px;    
+  background-repeat: no-repeat;
+  position: relative;
+}
 
-  .carousel p{
-    top: 50%;
-    position: absolute;
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    background-color: aqua;
-    border-radius: 25px;
-    text-align: center;
-    opacity: 0.5;
-  }
-  .carousel p:hover{
-    opacity: 1;
-  }
-  .carousel p:last-child{
-    right: 0%;
-  }
+.carousel p{
+  top: 50%;
+  position: absolute;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-color: aqua;
+  border-radius: 25px;
+  text-align: center;
+  opacity: 0.5;
+}
+.carousel p:hover{
+  opacity: 1;
+}
+.carousel p:last-child{
+  right: 0%;
+}
 
-  
