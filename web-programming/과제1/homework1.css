@@ -72,9 +72,11 @@ header{
 .dp1 :hover .dp2 > ul  {
     visibility: visible;
     height: 100%;
+
 }
 .dp1 :hover .dp2 > ul >li  {
-    font-size: 0.9rem;
+    opacity: 1;
+
 
 }
 
@@ -90,7 +92,7 @@ header{
     white-space: nowrap;
     height: 0%;
     visibility: hidden; 
-    transition: height 0.3s ease, visibility 0.3s ease;  
+    transition: height 0.3s , visibility 0.3s ;  
 
 }
 a{
@@ -101,9 +103,8 @@ a{
 .dp2 > ul >li{
     padding: 0.5rem 0.5rem;
     display: inline-block;
-    font-size: 0;
     font-weight: 900;
-    transition: 0.3s;
+    opacity: 0;
    
 }
 
