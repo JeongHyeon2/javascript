@@ -61,5 +61,10 @@
   .area_sc img {
     width: 100%;
   }
+  .box{
+    width: 300px;
+    height: 300px;
+    background-color: salmon;
+  }
   
   

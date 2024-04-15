@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./homework2.css" />
+  </head>
+  <body>
+    <p>Window height: <span id="height"></span></p>
+    <p>Window width: <span id="width"></span></p>
+    <div class="content_first">
+      <div class="fisrt">
+        <div class="first_image"></div>
+        <div class="content_text">
+          가격 이상의 가치가 담긴 다양한 메뉴를 확인해 보세요
+        </div>
+        <a class="content_link" href="">한솥 메뉴</a>
+      </div>
+
+      <div class="second">
+        <div class="second_image"></div>
+        <div class="content_text">
+          갓 지은 한끼가 기다리고 있는 가까운 한솥 매장을 찾아보세요
+        </div>
+        <a class="content_link" href="">주변점포찾기</a>
+      </div>
+    </div>
+    <div class="content_second">
+      <div class="second_content_first">
+        가맹점주에게도<br />든든한 한솥입니다
+      </div>
+      <div class="second_content_second">
+        <div class="third_image"></div>
+        <div class="content_text">
+          한솥은 언제나 고객과 점주님들의 이익을 먼저 생각합니다
+        </div>
+        <a class="content_link" href="">한솥 메뉴</a>
+      </div>
+      <div class="second_content_third">
+        <div class="fourth_image"></div>
+        <div class="content_text">
+          한솥과 함께하는 가맹점주들의 성공 스토리입니다
+        </div>
+        <a class="content_link" href="">한솥 메뉴</a>
+      </div>
+    </div>
+  </body>
+  <script>
+    const heightOutput = document.querySelector("#height");
+    const widthOutput = document.querySelector("#width");
+
+    function reportWindowSize() {
+      heightOutput.textContent = window.innerHeight;
+      widthOutput.textContent = window.innerWidth;
+    }
+
+    window.onresize = reportWindowSize;
+  </script>
+</html>
