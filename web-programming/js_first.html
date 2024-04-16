@@ -5,26 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="js/index.js"></script>
+    <link rel="stylesheet" href="./css/index.css" />
   </head>
   <body>
-    <div class="menu-box">
-      <p>메뉴</p>
-      <ul id="menu-ul">
-        <li class="ice-menu">커피</li>
-        <li class="ice-menu">밀크티</li>
-        <li class="hot-menu">녹차</li>
-      </ul>
+    <!-- <div class="todoList_container">
+      <div class="input_box">
+        <h3>할일 등록</h3>
+        <input id="todoDate" type="date" />
+        <input id="todoText" type="text" />
+        <input type="button" value="추가" onclick="onClick()" />
+      </div>
+      <div class="todo_list">
+        <ol id="todoOL"></ol>
+      </div>
+    </div> -->
+    <div>
+      <h1>할 일 목록</h1>
+      <button id="addBtn">리스트 추가</button>
     </div>
-    <p id="demo"></p>
-    <div class="buttons">
-      <button onclick="addText()">보기</button>
-      <button onclick="menuTemp()">음료색상표시</button>
-      <button onclick="menuTempClear()">음료색상표시해제</button>
-      <button onclick="removeMenu()">숨기기</button>
-      <p>순서</p>
-      <input class="select-textbox" type="text" width="100" />
-      <button onclick="popupSelected()">메뉴선택</button>
-      <button onclick="fontSizeUp()">폰트키우기</button>
-    </div>
+    <ul id="sampleList">
+      <li id="list1">기존 리스트 1</li>
+      <li id="list2">기존 리스트 2</li>
+      <li id="list3">기존 리스트 3</li>
+    </ul>
   </body>
+  <script>
+    window.onload = () => {
+      let lis = document.querySelectorAll("li");
+      //lis.forEach((li) => li.addEventListener("click", toggleList));
+
+      let ul = document.querySelector("#sampleList");
+      ul.addEventListener("click", toggleList);
+
+      let addBtn = document.querySelector("#addBtn");
+      addBtn.addEventListener("click", addList);
+    };
+    function toggleList(event) {
+      let clickedLi = document.getElementById(event.target.id);
+      clickedLi.classList.toggle("remove");
+    }
+    function addList() {
+      let sampleList = document.getElementById("sampleList");
+      let listLen = sampleList.children.length;
+      let newLi = document.createElement("li");
+      newLi.setAttribute("id", `list${listLen + 1}`);
+      newLi.appendChild(
+        document.createTextNode("기존 리스트 " + (listLen + 1))
+      );
+      sampleList.appendChild(newLi);
+    }
+
+    // let todoList = [];
+    // function onClick() {
+    //   //요소에 있는 값(value)를 조회하여 todoList를 갱신하는 코드 작성
+    //   //갱신 방법 1. 새로운 배열을 만들어 todoList에 재할당
+    //   //갱신 방법 2. push를 이용하여 새로운 값 넣기
+    //   //새로운 값은 두 개의 값(날짜와 내용)을 가지므로 객체로 표현하기
+    //   const todoDate = document.getElementById("todoDate").value;
+    //   const todoText = document.getElementById("todoText").value;
+    //   // todoList.push({ date: todoDate, text: todoText });
+    //   todoList = [...todoList, { date: todoDate, text: todoText }];
+    //   todoPainting();
+    // }
+    // function resetOL() {
+    //   const listItem = document.querySelectorAll(".todoItem");
+    //   //모든 li를 삭제하는 코드 작성
+    //   var root = document.getElementById("todoOL");
+
+    //   while (root.firstChild) {
+    //     root.removeChild(root.firstChild);
+    //   }
+    // }
+    // function todoPainting() {
+    //   resetOL();
+    //   const todoOL = document.getElementById("todoOL");
+    //   //todoList 배열에 있는 요소를 이용하여 li만들기
+    //   for (let i = 0; i < todoList.length; i++) {
+    //     var li = document.createElement("li");
+    //     var content = document.createTextNode(
+    //       todoList[i].date + " " + todoList[i].text
+    //     );
+    //     li.appendChild(content);
+    //     todoOL.appendChild(li);
+    //   }
+    // }
+  </script>
 </html>

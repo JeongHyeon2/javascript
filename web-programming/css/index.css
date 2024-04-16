@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+    padding: 0;
+  }
+  .todoList_container{
+    width: 500px;
+    padding: 1em;
+    margin: 0 auto;
+  }
+  .input_box{
+    background-color: #00BCD4;
+    padding: 1em;
+    color: #fff;
+      
+  }
+  .blueTxt{
+    color: blue;
+  }
+  .todo_list{
+    background-color: #efefef;
+    border: 1px solid #00BCD4;
+    padding: 1em;
+  }
+  #todoOL li{
+    margin: 0.5rem ;
+  }
+  .remove {
+    text-decoration: line-through;
+  }
+  
