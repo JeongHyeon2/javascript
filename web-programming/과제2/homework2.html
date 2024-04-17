@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="./homework2.css" />
   </head>
   <body>
-    <p>Window height: <span id="height"></span></p>
-    <p>Window width: <span id="width"></span></p>
     <div class="content_first">
       <div class="fisrt">
         <div class="first_image"></div>
@@ -76,8 +74,8 @@
         </div>
         <a class="btn">브랜드 철학</a>
       </div>
-      <div class="padding">1</div>
-      <div class="padding">2</div>
+      <div class="padding"></div>
+      <div class="padding"></div>
     </div>
 
     <div class="fourth_content">
@@ -95,17 +93,21 @@
           <a class="content_link" href="">식재료 이야기</a>
         </div>
       </div>
+      <div class="mobile">
+        <div class="image"></div>
+        <div class="content">
+          <div class="title">
+            식재료 앞에서는 <br />한없이<br />
+            까탈스럽습니다
+          </div>
+          <div class="content_text">
+            맑고 깨끗한 자연 환경속에서 재배된 식재료가 아니면 한솥이 될 수
+            없습니다. 모든 식재료는 고객분들이 안심하고 드실 수 있도록 엄격한
+            기준 아래 선별됩니다.
+          </div>
+          <a class="content_link" href="">식재료 이야기</a>
+        </div>
+      </div>
     </div>
   </body>
-  <script>
-    const heightOutput = document.querySelector("#height");
-    const widthOutput = document.querySelector("#width");
-
-    function reportWindowSize() {
-      heightOutput.textContent = window.innerHeight;
-      widthOutput.textContent = window.innerWidth;
-    }
-
-    window.onresize = reportWindowSize;
-  </script>
 </html>
