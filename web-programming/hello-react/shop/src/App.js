@@ -7,6 +7,7 @@ import Search from "./Search";
 import Carousel from "./Carousel";
 import Register from "./Register";
 import ComponentStudy from "./ComponentStudy";
+import Kiosk from "./assignment_3/Kiosk";
 
 const shop1 = {
   shopId: 0,
@@ -37,7 +38,8 @@ function App() {
     setSelectedShop(shop[id]);
   }
   return (
-    <ComponentStudy></ComponentStudy>
+    <Kiosk></Kiosk>
+    //   <ComponentStudy></ComponentStudy>
     // <Register></Register>
     // <Carousel></Carousel>
     //<Search></Search>

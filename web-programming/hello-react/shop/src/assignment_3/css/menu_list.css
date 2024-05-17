@@ -1,0 +1,12 @@
+.menu_list_container{
+   
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.orderMenu_container{
+    width: 230px;
+    height: 400px;
+    border: 1px solid black;
+}

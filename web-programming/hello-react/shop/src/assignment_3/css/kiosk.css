@@ -1,0 +1,12 @@
+.kiosk_container{
+    width: 500px;
+    border: solid 1px black;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+.kiosk_parent{
+    width: 500px;
+    height: 600px;
+    margin: 0 auto;
+
+}
