@@ -3,6 +3,10 @@ import "./App.css";
 import { useState } from "react";
 import Paging from "./Paging";
 import EventPractice from "./EventPractice";
+import Search from "./Search";
+import Carousel from "./Carousel";
+import Register from "./Register";
+import ComponentStudy from "./ComponentStudy";
 
 const shop1 = {
   shopId: 0,
@@ -33,43 +37,47 @@ function App() {
     setSelectedShop(shop[id]);
   }
   return (
-    <div className="post-container">
-      <EventPractice></EventPractice>
+    <ComponentStudy></ComponentStudy>
+    // <Register></Register>
+    // <Carousel></Carousel>
+    //<Search></Search>
+    // <div className="post-container">
+    //   <EventPractice></EventPractice>
 
-      <hr></hr>
-      <div
-        className="post-list"
-        onClick={onClickShop}
-        data-seq={shop[0].shopId}
-      >
-        <h2>상호명: {shop[0].name}</h2>
-        <img src={shop[0].imageUrl}></img>
-      </div>
-      <div
-        className="post-list"
-        onClick={onClickShop}
-        data-seq={shop[1].shopId}
-      >
-        <h2>상호명: {shop[1].name}</h2>
-        <img src={shop[1].imageUrl}></img>
-      </div>
-      <div>
-        <h2>상세정보</h2>
-        <div>
-          <div>
-            <span>주소</span> {selectedShop != null ? selectedShop.address : ""}
-          </div>
-          <div>
-            <span>
-              전화번호 {selectedShop != null ? selectedShop.phoneNumber : ""}
-            </span>
-          </div>
-          <div>
-            <span>별점 {selectedShop != null ? selectedShop.star : ""}</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    //   <hr></hr>
+    //   <div
+    //     className="post-list"
+    //     onClick={onClickShop}
+    //     data-seq={shop[0].shopId}
+    //   >
+    //     <h2>상호명: {shop[0].name}</h2>
+    //     <img src={shop[0].imageUrl}></img>
+    //   </div>
+    //   <div
+    //     className="post-list"
+    //     onClick={onClickShop}
+    //     data-seq={shop[1].shopId}
+    //   >
+    //     <h2>상호명: {shop[1].name}</h2>
+    //     <img src={shop[1].imageUrl}></img>
+    //   </div>
+    //   <div>
+    //     <h2>상세정보</h2>
+    //     <div>
+    //       <div>
+    //         <span>주소</span> {selectedShop != null ? selectedShop.address : ""}
+    //       </div>
+    //       <div>
+    //         <span>
+    //           전화번호 {selectedShop != null ? selectedShop.phoneNumber : ""}
+    //         </span>
+    //       </div>
+    //       <div>
+    //         <span>별점 {selectedShop != null ? selectedShop.star : ""}</span>
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 }
 

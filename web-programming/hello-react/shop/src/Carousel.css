@@ -1,0 +1,28 @@
+.container {
+    width: 500px;
+    margin: 0 auto;
+    overflow: hidden;
+    text-align: center;
+  }
+  .carousel-container {
+    margin: 0 auto;
+    margin-bottom: 2em;
+    display: flex;
+    transition-duration: 0.5s;
+  }
+  img {
+    width: 500px;
+    height: 500px;
+  }
+  .button-container {
+    text-align: center;
+  }
+  button {
+    background-color: crimson;
+    font-size: large;
+    padding: 10px;
+    border: none;
+    border-radius: 10%;
+    margin: 0px 10px;
+  }
+  
