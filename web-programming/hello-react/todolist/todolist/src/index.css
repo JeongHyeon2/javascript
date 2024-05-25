@@ -86,14 +86,14 @@ body {
   color: #adb5bd;
   text-decoration: line-through;
 }
-.TodoListItem .remove {
+.TodoListItem .remove,.edit,.undo {
   display: flex;
   align-items: center;
   font-size: 1.5rem;
   color: #ff6b6b;
   cursor: pointer;
 }
-.TodoListItem .remove:hover {
+.TodoListItem .remove,.edit,.undo:hover {
   color: #ff8787;
 }
 .TodoListItem:not(.TodoListItem:first-child) {
