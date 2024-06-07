@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
-import "./MyPageOwnerRegister.css";
+import { useLocation } from "react-router-dom";
+import "./MyPageOwnerEdit.css";
 import axios from "axios";
-export default function MyPageOwnerRegister() {
+import MySiteRegister from "./MySiteRegister";
+import RegisteredSite from "./RegisteredSite";
+export default function MyPageOwnerEdit() {
+  const location = useLocation();
   const [imageUrl, setImageUrl] = useState(""); // 이미지 미리보기 URL 상태 추가
   const [selectedFile, setSelectedFile] = useState(null);
   const [facilities, setFacilities] = useState({
@@ -14,8 +18,9 @@ export default function MyPageOwnerRegister() {
     valley: false,
     mountain: false,
   });
+  const [sites, setSites] = useState([]);
+  const [campSiteNum, setCampSiteNum] = useState(null);
   const [userId, setUserId] = useState(null);
-  const [role, setRole] = useState(null);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [contact, setContact] = useState("");
@@ -39,12 +44,61 @@ export default function MyPageOwnerRegister() {
     }));
   };
   useEffect(() => {
-    // 컴포넌트가 마운트될 때 로컬 스토리지에서 토큰을 가져와 로그인 상태 확인
+    const campSiteNum = location.state.campsiteNum;
+    setCampSiteNum(campSiteNum);
+    console.log(campSiteNum);
     const token = localStorage.getItem("user_num");
     const role = localStorage.getItem("role");
-    if (token && role) {
+    if (token && role && campSiteNum) {
       setUserId(token);
-      setRole(role);
+      axios
+        .get(`${process.env.REACT_APP_MY_IP}/campsite/detail/${campSiteNum}`)
+        .then((response) => {
+          const {
+            address,
+            campsite_num,
+            content,
+            enter_time,
+            exit_time,
+            facilities,
+            manner_time_end,
+            manner_time_start,
+            name,
+            photo_url,
+            sites,
+            telephone,
+          } = response.data;
+          setCampSiteNum(campsite_num);
+          let str_enter_time = enter_time;
+          let str_exit_time = exit_time;
+          let str_manner_time_end = manner_time_end;
+          let str_manner_time_start = manner_time_start;
+          setImageUrl(`${process.env.REACT_APP_MY_IP}/${photo_url}`);
+          setAddress(address);
+          setDescription(content);
+          setCheckinTime(str_enter_time.slice(0, -3));
+          setCheckoutTime(str_exit_time.slice(0, -3));
+          setFacilities((prevFacilities) => {
+            const newFacilities = { ...prevFacilities };
+
+            facilities.forEach((facility) => {
+              console.log(facility);
+
+              if (newFacilities.hasOwnProperty(facility)) {
+                newFacilities[facility] = true;
+              }
+            });
+            return newFacilities;
+          });
+          setSites(sites);
+          setmannerTimeStart(str_manner_time_start.slice(0, -3));
+          setmannerTimeEnd(str_manner_time_end.slice(0, -3));
+          setName(name);
+          setContact(telephone);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }, []);
   const handleNameChange = (e) => {
@@ -67,9 +121,8 @@ export default function MyPageOwnerRegister() {
       .forEach((key, index) => {
         formData.append(`facilities[${index}][facility]`, key);
       });
-    console.log(formData);
     axios
-      .post(`${process.env.REACT_APP_MY_IP}/campsite`, formData, {
+      .put(`${process.env.REACT_APP_MY_IP}/campsite/${campSiteNum}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -218,6 +271,33 @@ export default function MyPageOwnerRegister() {
         </label>
       </div>
       <button onClick={onClickBtn}>확인</button>
+      {sites.map((site) => (
+        <RegisteredSite data={site} />
+      ))}
+      <MySiteRegister
+        addSite={(newSite) => {
+          console.log(newSite);
+          const formData = new FormData();
+          formData.append("sitePhotoUrl", newSite.sitePhotoUrl);
+          formData.append("siteName", newSite.siteName);
+          formData.append("campsiteNum", campSiteNum);
+          formData.append("category", newSite.category);
+          formData.append("pCapacity", newSite.pCapacity);
+          formData.append("charge", newSite.charge);
+          axios
+            .post(`${process.env.REACT_APP_MY_IP}/site`, formData, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        }}
+      ></MySiteRegister>
     </div>
   );
 }
