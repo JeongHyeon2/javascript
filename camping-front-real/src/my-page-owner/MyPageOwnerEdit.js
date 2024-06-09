@@ -105,30 +105,27 @@ export default function MyPageOwnerEdit() {
     setName(e.target.value);
   };
   const onClickBtn = () => {
-    const formData = new FormData();
-    formData.append("photoUrl", selectedFile);
-    formData.append("userNum", userId);
-    formData.append("campsiteNum", campSiteNum);
-    formData.append("name", name);
-    formData.append("address", address);
-    formData.append("telephone", contact);
-    formData.append("content", description);
-    formData.append("enterTime", `${checkinTime}:00`);
-    formData.append("exitTime", `${checkoutTime}:00`);
-    formData.append("mannerTimeStart", `${mannerTimeStart}:00`);
-    formData.append("mannerTimeEnd", `${mannerTimeEnd}:00`);
-    Object.keys(facilities)
-      .filter((key) => facilities[key])
-      .forEach((key, index) => {
-        formData.append(`facilities[${index}][facility]`, key);
-      });
-    console.log(formData);
+    // Filter out the facilities that are true
+    const selectedFacilities = Object.keys(facilities).filter(
+      (facility) => facilities[facility]
+    );
+
+    const body = {
+      userNum: userId,
+      campsiteNum: campSiteNum,
+      name: name,
+      content: description,
+      address: address,
+      telephone: contact,
+      enterTime: `${checkinTime}:00`,
+      exitTime: `${checkoutTime}:00`,
+      mannerTimeStart: `${mannerTimeStart}:00`,
+      mannerTimeEnd: `${mannerTimeEnd}:00`,
+      facilities: selectedFacilities, // Only include selected facilities
+    };
+    console.log(body);
     axios
-      .put(`${process.env.REACT_APP_MY_IP}/campsite`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .put(`${process.env.REACT_APP_MY_IP}/campsite`, body, {})
       .then((response) => {
         console.log(response);
       })
