@@ -1,0 +1,16 @@
+.Review{
+    margin: 0 auto;
+    width: 500px;
+    height: 500px;
+    border: 1px solid black;
+
+}
+.ReviewContent{
+    width: 200px;
+    height: 100px;
+
+}
+.ReservationCampingContainerImg{
+    width: 100px;
+    height: 100px;
+}

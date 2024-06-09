@@ -13,12 +13,20 @@ export default function CampingDetail() {
       state: { site_id: site_id },
     });
   };
+  const [reviews, setReviews] = useState([]);
   useEffect(() => {
     const campSiteNum = location.state.campsiteNum;
     axios
       .get(`${process.env.REACT_APP_MY_IP}/campsite/detail/${campSiteNum}`)
       .then((res) => {
         setCampsite(() => res.data);
+        console.log(res.data);
+      });
+    axios
+      .get(`${process.env.REACT_APP_MY_IP}/review/${campSiteNum}`)
+      .then((res) => {
+        setReviews(() => res.data);
+
         console.log(res.data);
       });
   }, []);
@@ -60,6 +68,8 @@ export default function CampingDetail() {
             <h4>부대시설</h4>
             <div>{campsite.facilities}</div>
           </div>
+          <hr></hr>
+          <h1>사이트</h1>
           {campsite.sites.map((site) => (
             <RegisteredSite
               data={site}
@@ -69,6 +79,28 @@ export default function CampingDetail() {
           ))}
         </div>
       )}
+      <hr></hr>
+      <h1>리뷰</h1>
+      {reviews &&
+        reviews.map((review) => (
+          <ReviewItem key={review.review_id} review={review}></ReviewItem>
+        ))}
+    </div>
+  );
+}
+
+function ReviewItem({ review }) {
+  const { review_photo, review_post, review_star, user_num } = review;
+  return (
+    <div>
+      <img
+        src={`${process.env.REACT_APP_MY_IP}/${review_photo}`}
+        alt="Preview"
+        className="preview-image"
+      />
+      <div>내용:{review_post}</div>
+      <div>점수:{review_star}</div>
+      <div>작성자:{user_num}</div>
     </div>
   );
 }

@@ -8,6 +8,7 @@ import MainPage from "./main-page/MainPage";
 import CampingDetail from "./common/CampingDetail";
 import SiteDetail from "./common/SiteDetail";
 import MyPage from "./my-page-customer/MyPage";
+import Review from "./common/Review";
 function App() {
   return (
     <Router>
@@ -21,6 +22,7 @@ function App() {
           <Route path="/camping-detail" element={<CampingDetail />} />
           <Route path="/site-detail" element={<SiteDetail />} />
           <Route path="/my-page" element={<MyPage />} />
+          <Route path="/review" element={<Review />} />
         </Routes>
       </div>
     </Router>
