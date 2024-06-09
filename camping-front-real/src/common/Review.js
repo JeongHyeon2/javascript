@@ -30,6 +30,7 @@ export default function Review() {
       })
       .then((response) => {
         console.log(response);
+        alert("리뷰 작성 성공");
         navigate("/main-page");
       })
       .catch((error) => {

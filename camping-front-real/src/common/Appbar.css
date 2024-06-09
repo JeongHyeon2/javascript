@@ -1,0 +1,9 @@
+.AppbarContainer{
+    height: 50px;
+    width: 100%;
+    border: 1px solid black;
+
+    top: 0;
+    left: 0;
+    right: 0;
+  }

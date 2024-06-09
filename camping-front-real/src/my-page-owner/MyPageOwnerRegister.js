@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./MyPageOwnerRegister.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 export default function MyPageOwnerRegister() {
   const [imageUrl, setImageUrl] = useState(""); // 이미지 미리보기 URL 상태 추가
   const [selectedFile, setSelectedFile] = useState(null);
@@ -24,7 +25,7 @@ export default function MyPageOwnerRegister() {
   const [checkoutTime, setCheckoutTime] = useState("");
   const [mannerTimeStart, setmannerTimeStart] = useState("");
   const [mannerTimeEnd, setmannerTimeEnd] = useState("");
-
+  const navigate = useNavigate();
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImageUrl(URL.createObjectURL(file));
@@ -76,6 +77,8 @@ export default function MyPageOwnerRegister() {
       })
       .then((response) => {
         console.log(response);
+        alert("등록 성공");
+        navigate("/main-page");
       })
       .catch((error) => {
         console.log(error);

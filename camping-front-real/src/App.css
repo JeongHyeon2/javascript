@@ -1,0 +1,7 @@
+.rootContainer{
+    display: flexbox;
+    justify-content: center;
+}
+.rootContent{
+    margin-top: 50px;
+}

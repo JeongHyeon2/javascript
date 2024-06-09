@@ -30,6 +30,14 @@ export default function MyPageOwnerCampings() {
   };
   return (
     <div className="MyPageOwnerCampings">
+      <h1>내 캠핑장</h1>
+      <button
+        onClick={() => {
+          navigate("/owner-reservations");
+        }}
+      >
+        예약 내역
+      </button>
       {campings.map((camping) => (
         <Site
           key={camping.campsite_num}

@@ -1,0 +1,11 @@
+.OwnerReservationListContainer{
+    width: 1000px;
+    height: 800px;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+.ReservationRowContainer{
+    width: 1000px;
+    height: 50px;
+    border: 1px solid black;
+}

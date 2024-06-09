@@ -4,7 +4,6 @@ export default function MySiteRegister({ addSite }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div>
-      사이트 리스트
       <div>
         <button onClick={() => setIsModalOpen(!isModalOpen)}>
           사이트 추가

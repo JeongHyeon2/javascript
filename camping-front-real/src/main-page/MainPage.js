@@ -20,8 +20,14 @@ export default function MainPage() {
   const onClickCamping = (campsite_num) => {
     navigate("/camping-detail", { state: { campsiteNum: campsite_num } });
   };
+  const onClickRegisterCamping = () => {
+    navigate("/owner-register");
+  };
   return (
     <div className="mainPageContainer">
+      {localStorage.getItem("role") === "admin" ? (
+        <button onClick={onClickRegisterCamping}>캠핑장 등록</button>
+      ) : null}
       {campings.map((camping) => {
         return (
           <Site

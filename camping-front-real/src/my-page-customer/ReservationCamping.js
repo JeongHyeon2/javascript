@@ -61,11 +61,7 @@ export default function ReservationCamping({ data }) {
           &nbsp; 사이트 이름 : {site.site_name}
         </div>
       )}
-      {canReview ? (
-        <button onClick={onClickReview}>리뷰작성</button>
-      ) : (
-        <button onClick={onClickReview}>리뷰작성</button>
-      )}
+      {canReview ? <button onClick={onClickReview}>리뷰작성</button> : null}
     </div>
   );
 }

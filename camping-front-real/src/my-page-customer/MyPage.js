@@ -18,6 +18,7 @@ export default function MyPage() {
   }, []);
   return (
     <div className="MyPageContainer">
+      <h1>내 예약</h1>
       {reservationList &&
         reservationList.map((item) => (
           <ReservationCamping data={item}></ReservationCamping>

@@ -27,7 +27,7 @@ export default function Login() {
           localStorage.setItem("role", role);
 
           // 로그인 성공시 /owner-register로 이동
-          navigate("/owner-register"); // useNavigate 훅 사용하여 페이지 이동
+          navigate("/main-page"); // useNavigate 훅 사용하여 페이지 이동
         })
         .catch((error) => {
           console.error("로그인 실패:", error);

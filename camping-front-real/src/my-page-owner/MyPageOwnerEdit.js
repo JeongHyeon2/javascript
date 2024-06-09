@@ -43,7 +43,7 @@ export default function MyPageOwnerEdit() {
       [name]: checked,
     }));
   };
-  useEffect(() => {
+  const getData = () => {
     const campSiteNum = location.state.campsiteNum;
     setCampSiteNum(campSiteNum);
     console.log(campSiteNum);
@@ -100,6 +100,9 @@ export default function MyPageOwnerEdit() {
           console.log(error);
         });
     }
+  };
+  useEffect(() => {
+    getData();
   }, []);
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -128,6 +131,7 @@ export default function MyPageOwnerEdit() {
       .put(`${process.env.REACT_APP_MY_IP}/campsite`, body, {})
       .then((response) => {
         console.log(response);
+        alert("수정 완료");
       })
       .catch((error) => {
         console.log(error);
@@ -270,9 +274,12 @@ export default function MyPageOwnerEdit() {
         </label>
       </div>
       <button onClick={onClickBtn}>확인</button>
+      <hr></hr>
+      <h1>사이트 리스트</h1>
       {sites.map((site) => (
         <RegisteredSite data={site} />
       ))}
+
       <MySiteRegister
         addSite={(newSite) => {
           console.log(newSite);
@@ -290,7 +297,9 @@ export default function MyPageOwnerEdit() {
               },
             })
             .then((response) => {
+              alert("등록 완료");
               console.log(response);
+              getData();
             })
             .catch((error) => {
               console.error(error);
