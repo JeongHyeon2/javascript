@@ -9,9 +9,9 @@ export default function Site({ data, onClick }) {
   return (
     <div className="Site" onClick={onClick}>
       <img className="site_img" alt="Preview" src={photo}></img>
-      <div>{name}</div>
-      <div>{address}</div>
-      <div>{telephone}</div>
+      <div>캠핑장 이름: {name}</div>
+      <div>캠핑장 주소: {address}</div>
+      <div>전화번호: {telephone}</div>
     </div>
   );
 }

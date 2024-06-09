@@ -1,0 +1,6 @@
+.MyPageContainer{
+    margin: 0 auto;
+    width: 600px;
+    height: 800px;
+    border: solid 1px black;
+}
