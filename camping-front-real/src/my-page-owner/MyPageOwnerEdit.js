@@ -108,6 +108,7 @@ export default function MyPageOwnerEdit() {
     const formData = new FormData();
     formData.append("photoUrl", selectedFile);
     formData.append("userNum", userId);
+    formData.append("campsiteNum", campSiteNum);
     formData.append("name", name);
     formData.append("address", address);
     formData.append("telephone", contact);
@@ -121,8 +122,9 @@ export default function MyPageOwnerEdit() {
       .forEach((key, index) => {
         formData.append(`facilities[${index}][facility]`, key);
       });
+    console.log(formData);
     axios
-      .put(`${process.env.REACT_APP_MY_IP}/campsite/${campSiteNum}`, formData, {
+      .put(`${process.env.REACT_APP_MY_IP}/campsite`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
