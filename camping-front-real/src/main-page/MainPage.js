@@ -3,7 +3,20 @@ import "./MainPage.css";
 import axios from "axios";
 import Site from "../common/Site";
 import { useNavigate } from "react-router-dom";
+import CampFilter from "./CampFilter";
 export default function MainPage() {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleFilterButtonClick = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  // 문자열 불러오기
+  const myString = sessionStorage.getItem("filterOption");
   const [campings, setCampings] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -25,6 +38,10 @@ export default function MainPage() {
   };
   return (
     <div className="mainPageContainer">
+      <div className={"main-filter-button"} onClick={handleFilterButtonClick}>
+        검색필터
+      </div>
+
       {localStorage.getItem("role") === "admin" ? (
         <button onClick={onClickRegisterCamping}>캠핑장 등록</button>
       ) : null}
@@ -37,6 +54,7 @@ export default function MainPage() {
           ></Site>
         );
       })}
+      <CampFilter show={showModal} onClose={handleCloseModal} />
     </div>
   );
 }

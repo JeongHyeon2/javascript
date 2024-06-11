@@ -1,0 +1,70 @@
+/* 기본 폰트와 배경 색 설정 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* 이미지 스타일 */
+.registered_img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+/* 주요 컨테이너 */
+.SiteDetailContainer{
+    margin: 20px;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* 세부 정보 스타일 */
+div > div {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+input[type="number"] {
+    width: 50px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+/* 버튼 스타일 */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* 날짜 선택기 스타일 */
+.ReactDatePicker {
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+}

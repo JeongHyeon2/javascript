@@ -1,4 +1,5 @@
 import axios from "axios";
+import "./SiteDetail.css";
 import { useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -77,7 +78,7 @@ export default function SiteDetail() {
   return (
     <div>
       {site && (
-        <div>
+        <div className="SiteDetailContainer">
           <img
             className="registered_img"
             src={`${process.env.REACT_APP_MY_IP}/${site.site_photo_url}`}
