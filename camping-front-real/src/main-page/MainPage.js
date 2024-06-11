@@ -14,9 +14,20 @@ export default function MainPage() {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+  const onOkClick = () => {
+    const body = {
+      category: localStorage.getItem("category") || null,
+      region: localStorage.getItem("region") || null,
+      checkIn: localStorage.getItem("checkIn") || null,
+      checkOut: localStorage.getItem("checkOut") || null,
+    };
+    console.log(body);
+    axios.post(`${process.env.REACT_APP_MY_IP}/filtering`, body).then((res) => {
+      console.log(res.data);
+    });
+  };
 
   // 문자열 불러오기
-  const myString = sessionStorage.getItem("filterOption");
   const [campings, setCampings] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -54,7 +65,11 @@ export default function MainPage() {
           ></Site>
         );
       })}
-      <CampFilter show={showModal} onClose={handleCloseModal} />
+      <CampFilter
+        show={showModal}
+        onClose={handleCloseModal}
+        onClick={onOkClick}
+      />
     </div>
   );
 }

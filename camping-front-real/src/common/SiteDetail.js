@@ -25,6 +25,7 @@ export default function SiteDetail() {
       .get(`${process.env.REACT_APP_MY_IP}/reservation/${site_id}`)
       .then((res) => {
         setReservation(res.data);
+        console.log(res.data);
       });
   }, [location.state.site_id]);
 
@@ -34,6 +35,7 @@ export default function SiteDetail() {
       setEndDate(null);
     }
   };
+
   const isValidDate = (date) => {
     for (let res of reservation) {
       const resStartDate = new Date(res.check_in);
@@ -50,6 +52,7 @@ export default function SiteDetail() {
     }
     return true; // 날짜가 겹치지 않음
   };
+
   const handleEndDateChange = (date) => {
     setEndDate(() => date);
     if (!isValidDate(date)) {
@@ -75,6 +78,57 @@ export default function SiteDetail() {
       });
   };
 
+  const getReservedDates = () => {
+    return reservation.flatMap((res) => {
+      const checkInDate = new Date(res.check_in);
+      const checkOutDate = new Date(res.check_out);
+      const dates = [];
+      for (
+        let d = new Date(checkInDate);
+        d <= checkOutDate;
+        d.setDate(d.getDate() + 1)
+      ) {
+        dates.push(new Date(d));
+      }
+      return dates;
+    });
+  };
+
+  const reservedDates = getReservedDates();
+
+  const renderDayContents = (day, date) => {
+    var s = "대기";
+    const isReserved = reservedDates.some((reservedDate) => {
+      if (
+        reservedDate.getFullYear() === date.getFullYear() &&
+        reservedDate.getMonth() === date.getMonth() &&
+        reservedDate.getDate() === date.getDate()
+      ) {
+        reservation.map((res) => {
+          const d1 = new Date(res.check_in);
+
+          const d2 = new Date(res.check_out);
+
+          if (
+            d1.toDateString() === reservedDate.toDateString() ||
+            d2.toDateString() === reservedDate.toDateString()
+          ) {
+            if (res.approval == "approve") {
+              s = "";
+            }
+          }
+        });
+        return true;
+      }
+    });
+    return (
+      <div>
+        <span>{day}</span>
+        {isReserved && <div className="reserved">{s}</div>}
+      </div>
+    );
+  };
+
   return (
     <div>
       {site && (
@@ -91,49 +145,29 @@ export default function SiteDetail() {
           <div>
             <label>시작 날짜: </label>
             <ReactDatePicker
+              className="datepicker"
               selected={startDate}
               onChange={handleStartDateChange}
               selectsStart
               startDate={startDate}
               endDate={endDate}
               minDate={today}
-              excludeDates={reservation.flatMap((res) => {
-                const checkInDate = new Date(res.check_in);
-                const checkOutDate = new Date(res.check_out);
-                const dates = [];
-                for (
-                  let d = new Date(checkInDate);
-                  d <= checkOutDate;
-                  d.setDate(d.getDate() + 1)
-                ) {
-                  dates.push(new Date(d));
-                }
-                return dates;
-              })}
+              excludeDates={reservedDates}
+              renderDayContents={renderDayContents}
             />
           </div>
           <div>
             <label>끝 날짜: </label>
             <ReactDatePicker
+              className="datepicker"
               selected={endDate}
               onChange={handleEndDateChange}
               selectsEnd
               startDate={startDate}
               endDate={endDate}
               minDate={startDate || today}
-              excludeDates={reservation.flatMap((res) => {
-                const checkInDate = new Date(res.check_in);
-                const checkOutDate = new Date(res.check_out);
-                const dates = [];
-                for (
-                  let d = new Date(checkInDate);
-                  d <= checkOutDate;
-                  d.setDate(d.getDate() + 1)
-                ) {
-                  dates.push(new Date(d));
-                }
-                return dates;
-              })}
+              excludeDates={reservedDates}
+              renderDayContents={renderDayContents}
             />
           </div>
           <label>

@@ -17,7 +17,7 @@ body {
 }
 
 /* 주요 컨테이너 */
-.SiteDetailContainer{
+.SiteDetailContainer {
     margin: 20px;
     padding: 15px;
     background-color: #ffffff;
@@ -63,8 +63,49 @@ button:hover {
 }
 
 /* 날짜 선택기 스타일 */
-.ReactDatePicker {
+.react-datepicker {
     border: 1px solid #ccc;
-    padding: 8px;
     border-radius: 4px;
+    font-size: 16px;
+}
+.react-datepicker__day {
+    width: 300px; /* 날짜 셀의 너비를 원하는 크기로 설정 */
+    height: 300px; /* 날짜 셀의 높이 조정 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.react-datepicker__day--outside-month {
+    color: #ccc;
+}
+
+.react-datepicker__header {
+    background-color: #4CAF50;
+    color: white;
+}
+/* 날짜 셀의 너비를 넓히는 스타일 */
+.react-datepicker__day {
+    width: 40px; /* 너비를 원하는 크기로 설정 */
+    height: 40px; /* 높이도 조정 가능 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.react-datepicker__current-month {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.react-datepicker__day--selected, .react-datepicker__day--keyboard-selected {
+    background-color: #45a049;
+    color: white;
+}
+
+/* 날짜 셀 안의 텍스트 중앙 정렬 */
+.react-datepicker__day, .react-datepicker__day-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
