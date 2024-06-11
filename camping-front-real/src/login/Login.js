@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
-  const navigate = useNavigate(); // useNavigate 훅 사용
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setId(event.target.value);

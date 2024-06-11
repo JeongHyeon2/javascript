@@ -34,28 +34,28 @@ export default function SiteDetail() {
       setEndDate(null);
     }
   };
+  const isValidDate = (date) => {
+    for (let res of reservation) {
+      const resStartDate = new Date(res.check_in);
+      const resEndDate = new Date(res.check_out);
 
+      if (
+        (startDate >= resStartDate && startDate <= resEndDate) ||
+        (startDate >= resStartDate && date <= resEndDate) ||
+        (startDate <= resStartDate && date >= resEndDate) ||
+        (startDate <= resStartDate && date >= resEndDate)
+      ) {
+        return false; // 날짜가 겹침
+      }
+    }
+    return true; // 날짜가 겹치지 않음
+  };
   const handleEndDateChange = (date) => {
-    setEndDate(date);
-  };
-
-  const getDateIntervals = (reservations) => {
-    return reservations.map((res) => {
-      const checkInDate = new Date(res.check_in);
-      const checkOutDate = new Date(res.check_out);
-      return {
-        start: checkInDate,
-        end: checkOutDate,
-      };
-    });
-  };
-
-  const isDateDisabled = (date) => {
-    return reservation.some((res) => {
-      const checkInDate = new Date(res.check_in);
-      const checkOutDate = new Date(res.check_out);
-      return date >= checkInDate && date <= checkOutDate;
-    });
+    setEndDate(() => date);
+    if (!isValidDate(date)) {
+      alert("잘못된 날짜입니다");
+      setEndDate(() => null);
+    }
   };
 
   const makeReservation = () => {

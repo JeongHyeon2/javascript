@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import "./Appbar.css";
+import { useEffect, useState } from "react";
 export default function Appbar() {
   const navigate = useNavigate();
+
   const onClickLogin = () => {
     navigate("/login");
   };
@@ -25,12 +27,15 @@ export default function Appbar() {
       ) : (
         <button onClick={onClickLogout}>로그아웃</button>
       )}
+
       {localStorage.getItem("role") ? (
         <button onClick={onClickMyPage}>마이페이지</button>
       ) : null}
       <button
         onClick={() => {
-          navigate("/main-page");
+          if (localStorage.getItem("user_num")) {
+            navigate("/main-page");
+          }
         }}
       >
         홈

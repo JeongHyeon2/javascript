@@ -128,12 +128,13 @@ export default function CampingDetail() {
           ))}
         </div>
       )}
-      <hr />
-      <h1>리뷰</h1>
-      {reviews &&
-        reviews.map((review) => (
-          <ReviewItem key={review.review_id} review={review} />
-        ))}
+      <div className="myCampingRegisterContainer">
+        <h1>리뷰</h1>
+        {reviews &&
+          reviews.map((review) => (
+            <ReviewItem key={review.review_id} review={review} />
+          ))}
+      </div>
     </div>
   );
 }
@@ -141,7 +142,7 @@ export default function CampingDetail() {
 function ReviewItem({ review }) {
   const { review_photo, review_post, review_star, user_num } = review;
   return (
-    <div>
+    <div className="ReviewItemContainer">
       <img
         src={`${process.env.REACT_APP_MY_IP}/${review_photo}`}
         alt="Preview"
