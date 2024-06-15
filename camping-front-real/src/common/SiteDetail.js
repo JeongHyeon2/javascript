@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getDateFormat } from "./DateUtil";
 
 export default function SiteDetail() {
   const [site, setSite] = useState(null);
@@ -67,9 +68,10 @@ export default function SiteDetail() {
       userNum: localStorage.getItem("user_num"),
       adult: adult,
       child: child,
-      checkIn: startDate,
-      checkOut: endDate,
+      checkIn: getDateFormat(startDate),
+      checkOut: getDateFormat(endDate),
     };
+
     axios
       .post(`${process.env.REACT_APP_MY_IP}/reservation`, body)
       .then((res) => {

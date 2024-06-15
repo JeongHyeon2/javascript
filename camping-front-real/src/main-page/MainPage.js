@@ -15,15 +15,21 @@ export default function MainPage() {
     setShowModal(false);
   };
   const onOkClick = () => {
+    const cate =
+      localStorage.getItem("category") == "null"
+        ? null
+        : localStorage.getItem("category");
     const body = {
-      category: localStorage.getItem("category") || null,
+      category: cate,
       region: localStorage.getItem("region") || null,
+      name: localStorage.getItem("name") || null,
       checkIn: localStorage.getItem("checkIn") || null,
       checkOut: localStorage.getItem("checkOut") || null,
     };
     console.log(body);
     axios.post(`${process.env.REACT_APP_MY_IP}/filtering`, body).then((res) => {
       console.log(res.data);
+      setCampings(res.data);
     });
   };
 

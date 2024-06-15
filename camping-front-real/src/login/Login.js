@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./Login.css"; // CSS 파일 임포트
 
 export default function Login() {
   const [id, setId] = useState("");
@@ -38,20 +39,26 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div className="login-container">
+      <h2 className="login-title">로그인</h2>
+
       <input
         type="text"
+        className="id"
         onChange={handleChange}
         value={id}
         placeholder="아이디"
       />
       <input
         type="password"
+        className="pwd"
         onChange={handlePwdChange}
         value={pwd}
         placeholder="비밀번호"
       />
-      <button onClick={handleLogin}>로그인</button>
+      <button className="loginBtn" onClick={handleLogin}>
+        로그인
+      </button>
     </div>
   );
 }

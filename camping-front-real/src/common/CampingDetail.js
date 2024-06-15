@@ -150,7 +150,7 @@ function ReviewItem({ review }) {
       />
       <div>내용: {review_post}</div>
       <div>점수: {review_star}</div>
-      <div>작성자: {user_num}</div>
+      <div>작성자ID: {user_num}</div>
     </div>
   );
 }

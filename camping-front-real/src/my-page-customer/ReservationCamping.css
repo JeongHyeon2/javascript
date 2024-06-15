@@ -1,8 +1,14 @@
 .ReservationCampingContainer{
-    height: 200px;
+    height: 300px;
     border:  1px solid black;
 }
 .ReservationCampingContainerImg{
     width: 100px;
     height: 100px;
+}
+.ReservationCampingContainer span{
+    font-size: xx-large;
+    font-weight: 600;
+    margin-left: 500px;
+    text-align: right;
 }

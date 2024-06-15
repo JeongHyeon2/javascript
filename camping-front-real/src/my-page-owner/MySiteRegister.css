@@ -17,7 +17,7 @@
     text-align: center;
     max-height: 80%; /* 최대 높이를 설정하여 스크롤이 가능하도록 함 */
     overflow-y: auto; /* 내용이 넘칠 경우 수직 스크롤바를 표시 */
-    width: 400px; /* 모달 너비 설정 */
+    width: 450px; /* 모달 너비 설정 */
 }
 .selectMenu {
     width: 100%;

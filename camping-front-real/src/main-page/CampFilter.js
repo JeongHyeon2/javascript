@@ -7,12 +7,19 @@ const CampFilter = ({ show, onClose, onClick }) => {
   const [checkOutDate, setCheckOutDate] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [name, setName] = useState("");
+
   if (!show) {
     return null;
   }
-
+  function handleRadio(e) {
+    if (e.target.value === selectedOption) {
+      setSelectedOption(null);
+    }
+  }
   function handleRadioChange(e) {
-    setSelectedOption(e.target.value);
+    // 라디오 버튼을 다시 클릭하면 선택 값을 취소합니다.
+    const newValue = e.target.value === selectedOption ? null : e.target.value;
+    setSelectedOption(newValue);
   }
 
   function handleConfirm() {
@@ -34,6 +41,7 @@ const CampFilter = ({ show, onClose, onClick }) => {
           <div className="radio-container">
             <label>
               <input
+                onClick={handleRadio}
                 type="radio"
                 name="category"
                 value="캠핑"
@@ -44,6 +52,7 @@ const CampFilter = ({ show, onClose, onClick }) => {
             </label>
             <label>
               <input
+                onClick={handleRadio}
                 type="radio"
                 name="category"
                 value="글램핑"
@@ -54,6 +63,7 @@ const CampFilter = ({ show, onClose, onClick }) => {
             </label>
             <label>
               <input
+                onClick={handleRadio}
                 type="radio"
                 name="category"
                 value="카라반"
@@ -64,6 +74,7 @@ const CampFilter = ({ show, onClose, onClick }) => {
             </label>
             <label>
               <input
+                onClick={handleRadio}
                 type="radio"
                 name="category"
                 value="펜션"
@@ -91,14 +102,14 @@ const CampFilter = ({ show, onClose, onClick }) => {
             <label>입실일</label>
             <input
               type="date"
-              placeholder="입력 2"
+              placeholder="입실일"
               value={checkInDate}
               onChange={(e) => setCheckInDate(e.target.value)}
             />
             <label>퇴실일</label>
             <input
               type="date"
-              placeholder="입력 3"
+              placeholder="퇴실일"
               value={checkOutDate}
               onChange={(e) => setCheckOutDate(e.target.value)}
             />
