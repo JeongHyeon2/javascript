@@ -75,10 +75,54 @@ button:hover {
     align-items: center;
     justify-content: center;
   }
+  
+  .preview-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    overflow: hidden;
+  }
 
 .react-datepicker__day--outside-month {
     color: #ccc;
 }
+.carousel{
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width: 600px;
+    height: 300px;
+    overflow: hidden;
+}
+.container{
+    width: 500px;
+    margin: 0 auto;
+    overflow: hidden;
+    text-align: center;
+  }
+  .carousel-container{
+    margin: 0 auto;
+    margin-bottom: 2em;
+    display: flex;
+    transition-duration: 0.5s;
+  }
+.slider {
+    width: 500px;
+    height: 500px;
+  }
+  .button-container {
+    text-align: center;
+  }
+ .myCampingRegisterContainer button {
+    background-color: #4CAF50;
+    font-size: large;
+    padding: 10px;
+    border: none;
+    border-radius: 10%;
+    margin: 0px 10px;
+  }
+  
 
 .react-datepicker__header {
     background-color: #4CAF50;

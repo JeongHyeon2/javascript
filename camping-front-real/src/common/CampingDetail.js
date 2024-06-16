@@ -55,16 +55,47 @@ export default function CampingDetail() {
     }
     return null; // 매핑되지 않은 데이터인 경우
   };
+  const TOTAL_SLIDES = 2;
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const move = (e) => {
+    const buttonType = e.target.className;
+    console.log(buttonType);
+    if (buttonType === "nextButton") {
+      setCurrentSlide((currentSlide + 1) % TOTAL_SLIDES);
+    } else {
+      setCurrentSlide(
+        currentSlide - 1 < 0 ? TOTAL_SLIDES - 1 : currentSlide - 1
+      );
+    }
+  };
 
   return (
     <div>
       {campsite && (
         <div className="myCampingRegisterContainer">
-          <img
-            src={`${process.env.REACT_APP_MY_IP}/${campsite.photo_url}`}
-            alt="Preview"
-            className="preview-image"
-          />
+          <div className="container">
+            <div
+              className="carousel-container"
+              style={{ transform: `translateX(-${currentSlide}00%)` }}
+            >
+              <img
+                className="slider"
+                src={`${process.env.REACT_APP_MY_IP}/${campsite.photo_url}`}
+              ></img>
+              <img
+                className="slider"
+                src={`${process.env.REACT_APP_MY_IP}/${campsite.photo_url}`}
+              ></img>
+            </div>
+            <div className="button-container">
+              <button className="prevButton" onClick={move} value="prev">
+                Prev
+              </button>
+              <button className="nextButton" onClick={move} value="next">
+                Next
+              </button>
+            </div>
+          </div>
 
           <div>숙소 이름: {campsite.name}</div>
           <div>숙소 주소: {campsite.address}</div>
@@ -78,7 +109,6 @@ export default function CampingDetail() {
             <div className="timeMargin"></div>
             퇴실시간: {campsite.exit_time}
           </div>
-
           <div className="checkin-out-time">
             매너타임 시작: {campsite.manner_time_start}
             <div className="timeMargin"></div>
@@ -146,7 +176,7 @@ function ReviewItem({ review }) {
       <img
         src={`${process.env.REACT_APP_MY_IP}/${review_photo}`}
         alt="Preview"
-        className="preview-image"
+        className="review-img"
       />
       <div>내용: {review_post}</div>
       <div>점수: {review_star}</div>

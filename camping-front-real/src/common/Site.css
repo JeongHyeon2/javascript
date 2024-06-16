@@ -1,7 +1,7 @@
 .Site{
     margin: 0 auto;
     width: 300px;
-    height: 300px;
+    height: 500px;
     border: solid 1px black;
 }
 
@@ -9,3 +9,31 @@
     width: 300px;
     height: 200px;
 }
+.Site .container {
+    width: 200px;
+    margin: 0 auto;
+    overflow: hidden;
+    text-align: center;
+  }
+  .Site  .carousel-container {
+    margin: 0 auto;
+    margin-bottom: 2em;
+    display: flex;
+    transition-duration: 0.5s;
+  }
+  .Site  img {
+    width: 200px;
+    height: 200px;
+  }
+  .Site  .button-container {
+    text-align: center;
+  }
+  .Site  button {
+    background-color: crimson;
+    font-size: large;
+    padding: 10px;
+    border: none;
+    border-radius: 10%;
+    margin: 0px 10px;
+  }
+  
