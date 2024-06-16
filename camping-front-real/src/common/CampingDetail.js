@@ -89,10 +89,10 @@ export default function CampingDetail() {
             </div>
             <div className="button-container">
               <button className="prevButton" onClick={move} value="prev">
-                Prev
+                &larr;
               </button>
               <button className="nextButton" onClick={move} value="next">
-                Next
+                &rarr;
               </button>
             </div>
           </div>

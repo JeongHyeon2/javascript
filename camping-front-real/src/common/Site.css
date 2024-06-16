@@ -15,21 +15,23 @@
     overflow: hidden;
     text-align: center;
   }
-  .Site  .carousel-container {
+  .Site .carousel-container {
     margin: 0 auto;
-    margin-bottom: 2em;
     display: flex;
     transition-duration: 0.5s;
   }
+
   .Site  img {
     width: 200px;
     height: 200px;
   }
-  .Site  .button-container {
+  .Site .button-container {
+    justify-content: center;
     text-align: center;
+    display: flex;
   }
-  .Site  button {
-    background-color: crimson;
+  .Site button {
+    background-color: #4CAF50;
     font-size: large;
     padding: 10px;
     border: none;
