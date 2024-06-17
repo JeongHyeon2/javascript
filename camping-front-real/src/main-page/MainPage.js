@@ -58,10 +58,11 @@ export default function MainPage() {
       <div className={"main-filter-button"} onClick={handleFilterButtonClick}>
         검색필터
       </div>
-
-      {localStorage.getItem("role") === "admin" ? (
-        <button onClick={onClickRegisterCamping}>캠핑장 등록</button>
-      ) : null}
+      <div className="main-button">
+        {localStorage.getItem("role") === "admin" ? (
+          <button onClick={onClickRegisterCamping}>캠핑장 등록</button>
+        ) : null}
+      </div>
       {campings.map((camping) => {
         return (
           <Site

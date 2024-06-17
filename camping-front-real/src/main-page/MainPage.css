@@ -10,9 +10,13 @@
     padding: 20px;
     border-radius: 10px;
 }
-
+.main-button{
+    display: flex;
+    justify-content: center;
+}
 /* 검색 필터 버튼 스타일 */
 .main-filter-button {
+    margin: 16px auto;
     display: flex; /* Flexbox 사용 */
     justify-content: center; /* 수평 정렬 중앙 */
     align-items: center; /* 수직 정렬 중앙 */

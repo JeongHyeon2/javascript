@@ -2,4 +2,5 @@
     margin: 0 auto;
     width: 600px;
     border: solid 1px black;
+    border-radius: 16px;
 }
