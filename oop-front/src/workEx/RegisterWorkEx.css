@@ -1,0 +1,57 @@
+.RegisterWorkExContainer {
+    margin: 16px auto;
+    width: 800px;
+    height: 800px;
+    border: 1px solid black;
+  }
+  .RegisterWorkExContainer h1 {
+    margin-top: 32px;
+    text-align: center;
+  }
+  .memberList {
+    margin: 0 auto;
+    width: 600px;
+    height: 400px;
+    border: 1px solid black;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+  .memberDetail {
+    margin: 16px auto;
+    width: 600px;
+    height: 200px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+  }
+  .MemberRowContainer {
+    height: 100px;
+    border: 1px solid black;
+    line-height: 100px;
+    display: flex;
+    justify-content: space-evenly;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .MemberRowContainer.selected {
+    background-color: lightblue; 
+  }
+  .btn{
+    display: flex;
+    justify-content: end;
+    margin-right: 32px;
+  }
+  .MemberInfoRow{
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 16px;
+
+  }
+  .inputLabel{
+    margin-left: 16px;
+    justify-content: space-between;
+    width: 300px;
+    display: flex;
+  }
