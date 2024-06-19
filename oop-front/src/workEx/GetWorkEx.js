@@ -1,48 +1,12 @@
 import { useState, useRef, useEffect } from "react";
-import "./GetWorkEx.css";
+import "./RegisterWorkEx.css";
+import axios from "axios";
 
-export default function GetWorkEx() {
+export default function RegisterWorkEx() {
   const [selectedNumber, setSelectedNumber] = useState(null);
   const inputRefs = useRef({});
-
-  const testMembers = [
-    {
-      employeeNumber: 12345,
-      name: "김정현",
-      classification: "인사팀",
-      workExperience: {
-        소속변동: "변동없음",
-        발령사항: "없음",
-        학력: "대학교 졸업",
-        수행업무: "인사 관리",
-        평가: "우수",
-        근속기간: "5년",
-        교육이수: "인사관리 교육",
-        자격증: "인사관리사",
-        포상: "우수사원",
-        징계: "없음",
-        희망직무: "인사팀장",
-      },
-    },
-    {
-      employeeNumber: 12346,
-      name: "김정현",
-      classification: "인사팀",
-      workExperience: {
-        소속변동: "변동없음",
-        발령사항: "없음",
-        학력: "대학교 졸업",
-        수행업무: "인사 관리",
-        평가: "우수",
-        근속기간: "5년",
-        교육이수: "인사관리 교육",
-        자격증: "인사관리사",
-        포상: "우수사원",
-        징계: "없음",
-        희망직무: "인사팀장",
-      },
-    },
-  ];
+  const [users, setUsers] = useState([]);
+  const [workEx, setWorkEx] = useState(null);
 
   const inputFields = [
     "소속변동",
@@ -56,40 +20,95 @@ export default function GetWorkEx() {
     "포상",
     "징계",
     "희망직무",
+    "처벌",
   ];
+
+  const fieldMapping = {
+    소속변동: "classification",
+    발령사항: "appointment",
+    학력: "education",
+    수행업무: "work",
+    평가: "rating",
+    근속기간: "seniority",
+    교육이수: "positionExperience",
+    자격증: "trainingCourses",
+    포상: "certificate",
+    징계: "prize",
+    희망직무: "jobObjective",
+    처벌: "punishment",
+  };
+
+  useEffect(() => {
+    axios.get("http://172.30.104.63:5000/getAllEmployees").then((res) => {
+      console.log(res.data);
+      setUsers(res.data);
+    });
+  }, []);
 
   const onSelect = (memberNum) => {
     setSelectedNumber(memberNum);
-  };
-
-  const selectedMember = testMembers.find(
-    (member) => member.employeeNumber === selectedNumber
-  );
-
-  useEffect(() => {
-    if (selectedMember) {
-      inputFields.forEach((field) => {
-        if (inputRefs.current[field]) {
-          inputRefs.current[field].value =
-            selectedMember.workExperience[field] || "";
-        }
+    axios
+      .get(`http://172.30.104.63:5000/getWorkExperience/${memberNum}`)
+      .then((res) => {
+        console.log(res.data);
+        setWorkEx(res.data);
+        inputFields.forEach((field) => {
+          if (inputRefs.current[field]) {
+            const mappedField = fieldMapping[field];
+            inputRefs.current[field].value = res.data[mappedField] || "";
+          }
+        });
+      })
+      .catch((e) => {
+        setWorkEx(null);
+        inputFields.forEach((field) => {
+          if (inputRefs.current[field]) {
+            inputRefs.current[field].value = "";
+          }
+        });
       });
-    }
-  }, [selectedMember, inputFields]);
+  };
 
   const onClickRegister = () => {
-    console.log(selectedNumber);
+    const formData = { employeeNumber: selectedNumber };
+
     inputFields.forEach((field) => {
-      console.log(`${field}: ${inputRefs.current[field].value}`);
+      if (inputRefs.current[field]) {
+        const mappedField = fieldMapping[field];
+        formData[mappedField] = inputRefs.current[field].value;
+      }
     });
+
+    console.log("Sending data:", formData);
+
+    axios
+      .post(
+        `http://172.30.104.63:5000/createWorkExperience/${selectedNumber}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        console.log("Data sent successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error sending data:", error);
+      });
   };
+
+  const selectedMember = users.find(
+    (member) => member.employeeNumber === selectedNumber
+  );
 
   return (
     <div className="RegisterWorkExContainer">
       <div>
-        <h1>경력조회</h1>
+        <h1>경력등록</h1>
         <div className="memberList">
-          {testMembers.map((member) => (
+          {users.map((member) => (
             <MemberRow
               key={member.employeeNumber}
               member={member}
@@ -99,17 +118,17 @@ export default function GetWorkEx() {
           ))}
         </div>
         <div className="memberDetail">
-          {selectedMember && (
+          {selectedNumber && (
             <div>
               <div className="MemberInfoRow">
                 <div>사원번호: {selectedMember.employeeNumber}</div>
                 <div>이름: {selectedMember.name}</div>
-                <div>소속 부서: {selectedMember.classification}</div>
+                <div>소속 부서: {selectedMember.personnelAppointmentInfo}</div>
               </div>
               {inputFields.map((field, index) => (
                 <div key={index}>
                   <label className="inputLabel">
-                    {field}{" "}
+                    {field}
                     <input
                       disabled={true}
                       ref={(el) => (inputRefs.current[field] = el)}
@@ -139,7 +158,7 @@ const MemberRow = ({ member, selectedNumber, onClick }) => {
     >
       <div>사원번호: {member.employeeNumber}</div>
       <div>이름: {member.name}</div>
-      <div>소속 부서: {member.classification}</div>
+      <div>소속 부서: {member.personnelAppointmentInfo}</div>
     </div>
   );
 };
