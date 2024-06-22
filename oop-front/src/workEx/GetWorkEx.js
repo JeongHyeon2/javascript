@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import "./RegisterWorkEx.css";
 import axios from "axios";
 
-export default function RegisterWorkEx() {
+export default function GetWorkEx() {
   const [selectedNumber, setSelectedNumber] = useState(null);
   const inputRefs = useRef({});
   const [users, setUsers] = useState([]);
@@ -106,7 +106,7 @@ export default function RegisterWorkEx() {
   return (
     <div className="RegisterWorkExContainer">
       <div>
-        <h1>경력등록</h1>
+        <h1>경력조회</h1>
         <div className="memberList">
           {users.map((member) => (
             <MemberRow

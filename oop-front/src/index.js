@@ -14,5 +14,5 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<ComponentStudy />);
 
 function ComponentStudy() {
-  return <ApprovalPage></ApprovalPage>;
+  return <App></App>;
 }
