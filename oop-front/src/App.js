@@ -9,6 +9,8 @@ import RegisterCardUsage from "./cardUsage/RegisterCardUsage";
 import CardUsage from "./cardUsage/CardUsage";
 import ApprovalPage from "./budget/react/ApprovalPage";
 import BudgetRequest from "./budget/react/BudgetRequest";
+import Retirement from "./retirement/Retirement";
+import GetRetirement from "./retirement/GetRetirement";
 
 function App() {
   return (
@@ -41,10 +43,15 @@ function App() {
             <li>
               <Link to="/budget-request">예산 승인 신청</Link>
             </li>
+            <li>
+              <Link to="/retirement">퇴직금 계산</Link>
+            </li>
+            <li>
+              <Link to="/get-retirement">퇴직금 조회</Link>
+            </li>
           </ul>
         </nav>
 
-        {/* Routes 설정 */}
         <Routes>
           <Route path="/register-work" element={<RegisterWorkEx />}></Route>
           <Route path="/work" element={<GetWorkEx />}></Route>
@@ -61,6 +68,8 @@ function App() {
           <Route path="/cardusage" element={<CardUsage />}></Route>
           <Route path="/approval" element={<ApprovalPage />}></Route>
           <Route path="/budget-request" element={<BudgetRequest />}></Route>
+          <Route path="/retirement" element={<Retirement />}></Route>
+          <Route path="/get-retirement" element={<GetRetirement />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

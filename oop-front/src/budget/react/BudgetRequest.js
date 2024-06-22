@@ -81,7 +81,7 @@ export default function BudgetRequest() {
         <div id="budgetItemsContainer">
           {budgetItems.map((item, index) => (
             <div key={index}>
-              <label>세목 :</label>
+              <label>제목 :</label>
               <input
                 type="text"
                 className="category"
