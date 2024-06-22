@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Submit Budget Request</title>
+
+</head>
+<body>
+<h1>Submit Budget Request</h1>
+<form id="budgetForm" enctype="multipart/form-data">
+    <div>
+        <label for="departmentId">부서 ID :</label>
+        <input type="number" id="departmentId" name="departmentId" />
+    </div>
+
+    <h2>Budget Items</h2>
+    <div id="budgetItemsContainer">
+        <!-- Budget Items 추가할 곳 -->
+    </div>
+    <button type="button" onclick="addBudgetItem()">Add Budget Item</button>
+
+    <div>
+        <label for="documentFile">File:</label>
+        <input type="file" id="documentFile" name="documentFile" multiple/>
+    </div>
+
+    <button type="button" onclick="submitBudgetRequest()">Submit</button>
+</form>
+
+<br/>
+<button type="button" onclick="fetchApprovedRequests()">Fetch Approved Requests</button>
+<div id="approvedRequestsContainer"></div>
+<br/>
+
+<script>
+    function addBudgetItem() {
+        const container = document.getElementById('budgetItemsContainer');
+        const div = document.createElement('div');
+        div.innerHTML = `
+                <div>
+                    <label>세목 :</label>
+                    <input type="text" class="category" />
+                    <label>항목 :</label>
+                    <input type="text" class="subcategory" />
+                    <label>예산금액 :</label>
+                    <input type="number" class="allocated_amount" />
+                    <label>집행내역 :</label>
+                    <input type="number" class="executed_amount" />
+                    <button type="button" onclick="removeBudgetItem(this)">Remove</button>
+                </div>
+            `;
+        container.appendChild(div);
+    }
+    function removeBudgetItem(button) {
+        const item = button.parentNode.parentNode;
+        item.remove();
+    }
+
+    function submitBudgetRequest() {
+        const form = document.getElementById('budgetForm');
+        const formData = new FormData(form);
+
+        const budgetItems = [];
+        document.querySelectorAll('#budgetItemsContainer > div').forEach(item => {
+            const category = item.querySelector('.category').value;
+            const subcategory = item.querySelector('.subcategory').value;
+            const allocated_amount = item.querySelector('.allocated_amount').value;
+            const executed_amount = item.querySelector('.executed_amount').value;
+            budgetItems.push({ category, subcategory, allocated_amount: parseFloat(allocated_amount), executed_amount: parseFloat(executed_amount)});
+        });
+
+        formData.append('budgetRequest', new Blob([JSON.stringify({
+            departmentId: document.getElementById('departmentId').value,
+            budgetItems
+        })], { type: 'application/json' }));
+
+        fetch('http://localhost:8080/user/submitBudgetRequest', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => console.error('Error:', error));
+    }
+</script>
+</body>
+</html>
