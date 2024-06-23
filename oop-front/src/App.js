@@ -11,6 +11,8 @@ import ApprovalPage from "./budget/react/ApprovalPage";
 import BudgetRequest from "./budget/react/BudgetRequest";
 import Retirement from "./retirement/Retirement";
 import GetRetirement from "./retirement/GetRetirement";
+import Asset from "./asset/Asset";
+import GetAsset from "./asset/GetAsset";
 
 function App() {
   return (
@@ -49,6 +51,12 @@ function App() {
             <li>
               <Link to="/get-retirement">퇴직금 조회</Link>
             </li>
+            <li>
+              <Link to="/asset">자산명세서</Link>
+            </li>
+            <li>
+              <Link to="/get-asset">자산명세서 조회</Link>
+            </li>
           </ul>
         </nav>
 
@@ -70,6 +78,8 @@ function App() {
           <Route path="/budget-request" element={<BudgetRequest />}></Route>
           <Route path="/retirement" element={<Retirement />}></Route>
           <Route path="/get-retirement" element={<GetRetirement />}></Route>
+          <Route path="/asset" element={<Asset />}></Route>
+          <Route path="/get-asset" element={<GetAsset />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

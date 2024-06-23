@@ -49,7 +49,7 @@ export default function BudgetRequest() {
     });
 
     axios
-      .post("http://localhost:8080/user/submitBudgetRequest", formData)
+      .post("http://172.30.103.79:8080/", formData)
       .then((response) => {
         alert(response.data);
       })

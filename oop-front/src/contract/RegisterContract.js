@@ -15,17 +15,19 @@ export default function RegisterContract() {
     "계약주소",
     "계약부서",
     "계약자이름",
+    "계약상대자이름",
     "계약금액",
     "계약내용",
   ];
 
   const fieldMapping = {
-    계약이름: "contractName",
-    계약주소: "contractAddress",
-    계약부서: "contractRequestDepartment",
-    계약자이름: "contractPartnerName",
-    계약금액: "contractAmount",
-    계약내용: "contract",
+    계약이름: "contract_name",
+    계약주소: "contract_address",
+    계약부서: "contractRequest_department",
+    계약자이름: "contractor_name",
+    계약금액: "contract_amount",
+    계약내용: "contract_content",
+    계약상대자이름: "contract_partner_name",
   };
 
   const onClickRegister = () => {
@@ -39,15 +41,15 @@ export default function RegisterContract() {
     });
 
     // Add the dates to the formData
-    formData.contractStartDate = startDate.toISOString().split("T")[0];
-    formData.contractEndDate = endDate.toISOString().split("T")[0];
-    formData.checkRegion = checkRegion;
-    formData.checkNewBid = checkNewBid;
+    formData.contract_start_date = startDate.toISOString().split("T")[0];
+    formData.contract_end_date = endDate.toISOString().split("T")[0];
+    formData.is_Contractor_chungbuk_region = checkRegion ? 1 : 0;
+    formData.is_New_bid = checkNewBid ? 1 : 0;
 
     console.log("Sending data:", formData);
 
     axios
-      .post(`http://172.30.104.63:5000/createWorkExperience`, formData, {
+      .post(`http://172.30.74.3:5000/writeContract`, formData, {
         headers: {
           "Content-Type": "application/json",
         },

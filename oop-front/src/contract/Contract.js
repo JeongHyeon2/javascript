@@ -10,28 +10,81 @@ export default function Contract() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const inputRefs = useRef({});
-  const [data, setData] = useState([]);
-
-  useEffect(() => {}, []);
-
+  const [data, setData] = useState(null);
+  const [number, setNumber] = useState();
+  const [isValid, setIsValid] = useState(false);
   const inputFields = [
     "계약이름",
     "계약주소",
     "계약부서",
     "계약자이름",
+    "계약상대자이름",
     "계약금액",
     "계약내용",
   ];
 
   const fieldMapping = {
-    계약이름: "contractName",
-    계약주소: "contractAddress",
-    계약부서: "contractRequestDepartment",
-    계약자이름: "contractPartnerName",
-    계약금액: "contractAmount",
-    계약내용: "contract",
+    계약이름: "contract_name",
+    계약주소: "contract_address",
+    계약부서: "contractRequest_department",
+    계약자이름: "contractor_name",
+    계약금액: "contract_amount",
+    계약내용: "contract_content",
+    계약상대자이름: "contract_partner_name",
   };
-  const onClickContract = () => {};
+
+  const onClickContract = () => {
+    axios
+      .get(
+        `http://172.30.74.3:5000/findContract_number?contract_number=${number}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        console.log("Data received successfully:", response.data);
+        if (response.data) {
+          setIsValid(true);
+          axios
+            .get(
+              `http://172.30.74.3:5000/inquiryContract?contract_number=${number}`,
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              }
+            )
+            .then((response) => {
+              console.log("Data received successfully:", response.data);
+              setData(response.data);
+            })
+            .catch((error) => {
+              console.error("Error receiving data:", error);
+            });
+        } else {
+          setIsValid(false);
+        }
+      })
+      .catch((error) => {
+        console.error("Error receiving data:", error);
+      });
+  };
+
+  useEffect(() => {
+    if (data) {
+      Object.keys(fieldMapping).forEach((key) => {
+        if (inputRefs.current[key]) {
+          inputRefs.current[key].value = data[fieldMapping[key]];
+        }
+      });
+      setCheckRegion(data.is_Contractor_chungbuk_region === 1);
+      setCheckNewBid(data.is_New_bid === 1);
+      setStartDate(new Date(data.contract_start_date));
+      setEndDate(new Date(data.contract_end_date));
+    }
+  }, [data]);
 
   return (
     <>
@@ -40,74 +93,84 @@ export default function Contract() {
         <div className="inputBox">
           <label>
             계약서 번호:
-            <input></input>
+            <input
+              value={number}
+              onChange={(e) => {
+                setNumber(e.target.value);
+              }}
+            ></input>
           </label>
         </div>
         <div className="searchBox" onClick={onClickContract}>
           계약서 가져오기
         </div>
       </div>
-      <div className="RegisterContractContianer">
-        <h1>계약서 조회</h1>
-        {inputFields.map((field, index) => (
-          <div key={index} className="inputBox">
-            <label>
-              {field}
-              <br />
-              <textarea
-                disabled={true}
-                ref={(el) => (inputRefs.current[field] = el)}
-              />
-            </label>
-            {field === "계약주소" && (
-              <label className="checkRegion">
-                충북 지역 체크
-                <input
+      {isValid ? (
+        <>
+          {" "}
+          <div className="RegisterContractContainer">
+            <h1>계약서 조회</h1>
+            {inputFields.map((field, index) => (
+              <div key={index} className="inputBox">
+                <label>
+                  {field}
+                  <br />
+                  <textarea
+                    disabled={true}
+                    ref={(el) => (inputRefs.current[field] = el)}
+                  />
+                </label>
+                {field === "계약주소" && (
+                  <label className="checkRegion">
+                    충북 지역 체크
+                    <input
+                      disabled={true}
+                      type="checkbox"
+                      checked={checkRegion}
+                      onChange={(e) => setCheckRegion(e.target.checked)}
+                    ></input>
+                  </label>
+                )}
+                <br />
+              </div>
+            ))}
+            <div className="datepickerContainer">
+              <div>계약 시작일</div>
+              <div>
+                <DatePicker
                   disabled={true}
+                  className="datepicker"
+                  selected={startDate}
+                  onChange={(date) => setStartDate(date)}
+                  dateFormat="yyyy-MM-dd"
+                />
+              </div>
+            </div>
+            <div className="datepickerContainer">
+              <div>계약 종료일</div>
+              <div>
+                <DatePicker
+                  disabled={true}
+                  className="datepicker"
+                  selected={endDate}
+                  onChange={(date) => setEndDate(date)}
+                  dateFormat="yyyy-MM-dd"
+                />
+              </div>
+              <br />
+              <label className="checkRegion">
+                신규 입찰 체크
+                <input
                   type="checkbox"
-                  checked={checkRegion}
-                  onChange={(e) => setCheckRegion(e.target.checked)}
+                  disabled={true}
+                  checked={checkNewBid}
+                  onChange={(e) => setCheckNewBid(e.target.checked)}
                 ></input>
               </label>
-            )}
-            <br />
+            </div>
           </div>
-        ))}
-        <div className="datepickerContainer">
-          <div>계약 시작일</div>
-          <div>
-            <DatePicker
-              disabled={true}
-              className="datepicker"
-              selected={startDate}
-              onChange={(date) => setStartDate(date)}
-              dateFormat="yyyy-MM-dd"
-            />
-          </div>
-        </div>
-        <div className="datepickerContainer">
-          <div>계약 종료일</div>
-          <div>
-            <DatePicker
-              disabled={true}
-              className="datepicker"
-              selected={endDate}
-              onChange={(date) => setEndDate(date)}
-              dateFormat="yyyy-MM-dd"
-            />
-          </div>
-          <br />
-          <label className="checkRegion">
-            신규 입찰 체크
-            <input
-              type="checkbox"
-              disabled={true}
-              checked={checkNewBid}
-              onChange={(e) => setCheckNewBid(e.target.checked)}
-            ></input>
-          </label>
-        </div>
-      </div>
+        </>
+      ) : null}
     </>
   );
 }
