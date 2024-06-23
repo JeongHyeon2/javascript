@@ -11,8 +11,8 @@ export default function Contract() {
   const [endDate, setEndDate] = useState(new Date());
   const inputRefs = useRef({});
   const [data, setData] = useState(null);
-  const [number, setNumber] = useState();
-  const [isValid, setIsValid] = useState(false);
+  const [number, setNumber] = useState("");
+  const [isValid, setIsValid] = useState(true); // Default to true
   const inputFields = [
     "계약이름",
     "계약주소",
@@ -33,7 +33,17 @@ export default function Contract() {
     계약상대자이름: "contract_partner_name",
   };
 
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setNumber(value);
+    setIsValid(!isNaN(value) && value !== "");
+  };
+
   const onClickContract = () => {
+    if (isNaN(number) || number === "") {
+      setIsValid(false);
+      return;
+    }
     axios
       .get(
         `http://172.30.104.63:5000/findContract_number?contract_number=${number}`,
@@ -65,10 +75,12 @@ export default function Contract() {
             });
         } else {
           setIsValid(false);
+          alert("존재하지 않는 계약서 번호입니다.");
         }
       })
       .catch((error) => {
         console.error("Error receiving data:", error);
+        alert("존재하지 않는 계약서 번호입니다.");
       });
   };
 
@@ -91,85 +103,85 @@ export default function Contract() {
       <div className="InputContractNumber">
         <h1>계약서 번호 입력 </h1>
         <div className="inputBox">
-          <label>
-            계약서 번호:
-            <input
-              value={number}
-              onChange={(e) => {
-                setNumber(e.target.value);
-              }}
-            ></input>
-          </label>
+          <div>
+            <label>
+              계약서 번호:
+              <input
+                type="number"
+                value={number}
+                onChange={handleChange}
+                className={isValid ? "" : "error"}
+              />
+            </label>
+            {!isValid && <div className="error">숫자를 입력해주세요.</div>}
+          </div>
         </div>
         <div className="searchBox" onClick={onClickContract}>
           계약서 가져오기
         </div>
       </div>
-      {isValid ? (
-        <>
-          {" "}
-          <div className="RegisterContractContainer">
-            <h1>계약서 조회</h1>
-            {inputFields.map((field, index) => (
-              <div key={index} className="inputBox">
-                <label>
-                  {field}
-                  <br />
-                  <textarea
-                    disabled={true}
-                    ref={(el) => (inputRefs.current[field] = el)}
-                  />
-                </label>
-                {field === "계약주소" && (
-                  <label className="checkRegion">
-                    충북 지역 체크
-                    <input
-                      disabled={true}
-                      type="checkbox"
-                      checked={checkRegion}
-                      onChange={(e) => setCheckRegion(e.target.checked)}
-                    ></input>
-                  </label>
-                )}
+      {isValid && data ? (
+        <div className="RegisterContractContainer">
+          <h1>계약서 조회</h1>
+          {inputFields.map((field, index) => (
+            <div key={index} className="inputBox">
+              <label>
+                {field}
                 <br />
-              </div>
-            ))}
-            <div className="datepickerContainer">
-              <div>계약 시작일</div>
-              <div>
-                <DatePicker
+                <textarea
                   disabled={true}
-                  className="datepicker"
-                  selected={startDate}
-                  onChange={(date) => setStartDate(date)}
-                  dateFormat="yyyy-MM-dd"
+                  ref={(el) => (inputRefs.current[field] = el)}
                 />
-              </div>
-            </div>
-            <div className="datepickerContainer">
-              <div>계약 종료일</div>
-              <div>
-                <DatePicker
-                  disabled={true}
-                  className="datepicker"
-                  selected={endDate}
-                  onChange={(date) => setEndDate(date)}
-                  dateFormat="yyyy-MM-dd"
-                />
-              </div>
-              <br />
-              <label className="checkRegion">
-                신규 입찰 체크
-                <input
-                  type="checkbox"
-                  disabled={true}
-                  checked={checkNewBid}
-                  onChange={(e) => setCheckNewBid(e.target.checked)}
-                ></input>
               </label>
+              {field === "계약주소" && (
+                <label className="checkRegion">
+                  충북 지역 체크
+                  <input
+                    disabled={true}
+                    type="checkbox"
+                    checked={checkRegion}
+                    onChange={(e) => setCheckRegion(e.target.checked)}
+                  ></input>
+                </label>
+              )}
+              <br />
+            </div>
+          ))}
+          <div className="datepickerContainer">
+            <div>계약 시작일</div>
+            <div>
+              <DatePicker
+                disabled={true}
+                className="datepicker"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                dateFormat="yyyy-MM-dd"
+              />
             </div>
           </div>
-        </>
+          <div className="datepickerContainer">
+            <div>계약 종료일</div>
+            <div>
+              <DatePicker
+                disabled={true}
+                className="datepicker"
+                selected={endDate}
+                onChange={(date) => setEndDate(date)}
+                dateFormat="yyyy-MM-dd"
+              />
+            </div>
+            <br />
+            <label className="checkRegion">
+              신규 입찰 체크
+              <input
+                type="checkbox"
+                disabled={true}
+                checked={checkNewBid}
+                onChange={(e) => setCheckNewBid(e.target.checked)}
+              ></input>
+            </label>
+          </div>
+        </div>
       ) : null}
     </>
   );

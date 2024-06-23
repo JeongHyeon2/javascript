@@ -33,12 +33,15 @@ export default function RegisterContract() {
   const onClickRegister = () => {
     const formData = {};
 
-    inputFields.forEach((field) => {
-      if (inputRefs.current[field]) {
-        const mappedField = fieldMapping[field];
-        formData[mappedField] = inputRefs.current[field].value;
+    for (const field of inputFields) {
+      const inputValue = inputRefs.current[field]?.value;
+      if (!inputValue) {
+        alert(`${field}을(를) 입력해주세요.`);
+        return;
       }
-    });
+      const mappedField = fieldMapping[field];
+      formData[mappedField] = inputValue;
+    }
 
     // Add the dates to the formData
     formData.contract_start_date = startDate.toISOString().split("T")[0];
@@ -56,6 +59,10 @@ export default function RegisterContract() {
       })
       .then((response) => {
         console.log("Data sent successfully:", response.data);
+        if (response.data) {
+        } else {
+          alert("계약 날짜가 잘못되었습니다.");
+        }
       })
       .catch((error) => {
         console.error("Error sending data:", error);

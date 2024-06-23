@@ -8,6 +8,17 @@
     height: 1200px;
     border: 1px solid black;
 }
+/* RegisterContract.css */
+
+.error {
+    color: red;
+    margin-top: 5px;
+  }
+  
+  input.error {
+    border-color: red;
+  }
+  
 .inputBox{
     padding-bottom: 0;
 }
