@@ -4,57 +4,12 @@ import "./ApprovalPage.css";
 export default function ApprovalPage() {
   const [approvedRequests, setApprovedRequests] = useState([]);
 
-  // Dummy data for testing
-  useEffect(() => {
-    const dummyData = [
-      {
-        departmentId: "001",
-        status: "승인 완료",
-        budgetItems: [
-          {
-            category: "운영비",
-            subcategory: "사무용품",
-            allocated_amount: 500000,
-            executed_amount: 300000,
-          },
-          {
-            category: "인건비",
-            subcategory: "임원",
-            allocated_amount: 1000000,
-            executed_amount: 800000,
-          },
-        ],
-      },
-      {
-        departmentId: "002",
-        status: "승인 대기",
-        budgetItems: [
-          {
-            category: "자재비",
-            subcategory: "원자재",
-            allocated_amount: 800000,
-            executed_amount: 600000,
-          },
-          {
-            category: "운반비",
-            subcategory: "차량유지",
-            allocated_amount: 400000,
-            executed_amount: 200000,
-          },
-        ],
-      },
-    ];
-
-    setApprovedRequests(dummyData);
-
-    // If fetching from server is needed, use axios.get instead:
-    // fetchApprovedRequests();
-  }, []);
+  useEffect(() => {}, []);
 
   // Use axios to fetch data from the server
   const fetchApprovedRequests = () => {
     axios
-      .get("http://localhost:8080/team/approvedRequests")
+      .get("http://172.30.104.63:5000/team/approvedRequests")
       .then((response) => {
         setApprovedRequests(response.data);
       })

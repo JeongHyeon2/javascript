@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
-import "./BudgetRequest.css";
-export default function BudgetRequest() {
+
+const BudgetRequest = () => {
   const [departmentId, setDepartmentId] = useState("");
   const [budgetItems, setBudgetItems] = useState([]);
   const [files, setFiles] = useState([]);
@@ -19,72 +18,95 @@ export default function BudgetRequest() {
   };
 
   const handleRemoveBudgetItem = (index) => {
-    setBudgetItems(budgetItems.filter((_, i) => i !== index));
+    const newBudgetItems = budgetItems.slice();
+    newBudgetItems.splice(index, 1);
+    setBudgetItems(newBudgetItems);
   };
 
   const handleBudgetItemChange = (index, field, value) => {
-    const newBudgetItems = budgetItems.map((item, i) =>
-      i === index ? { ...item, [field]: value } : item
-    );
+    const newBudgetItems = budgetItems.slice();
+    newBudgetItems[index][field] = value;
     setBudgetItems(newBudgetItems);
   };
 
   const handleFileChange = (event) => {
-    setFiles([...event.target.files]);
+    setFiles(event.target.files);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const formData = new FormData();
     formData.append("departmentId", departmentId);
 
+    const budgetItemsData = budgetItems.map((item) => ({
+      category: item.category,
+      subcategory: item.subcategory,
+      allocated_amount: parseFloat(item.allocated_amount),
+      executed_amount: parseFloat(item.executed_amount),
+    }));
+
     formData.append(
-      "예산",
-      new Blob([JSON.stringify({ departmentId, budgetItems })], {
-        type: "application/json",
-      })
+      "budgetRequest",
+      new Blob(
+        [
+          JSON.stringify({
+            departmentId,
+            budgetItems: budgetItemsData,
+          }),
+        ],
+        { type: "application/json" }
+      )
     );
+    if (files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        formData.append("documentFile", files[i]);
+      }
+    } else {
+      formData.append(
+        "documentFile",
+        new Blob([], { type: "application/octet-stream" })
+      );
+    }
 
-    files.forEach((file, index) => {
-      formData.append(`documentFile`, file);
-    });
-
-    axios
-      .post("http://172.30.103.79:8080/", formData)
-      .then((response) => {
-        alert(response.data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    try {
+      const response = await fetch(
+        "http://172.30.104.63:5000/user/submitBudgetRequest",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      const data = await response.json();
+      if (data.status === "success") {
+        alert(data.message);
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
-    <div className="BudgetRequestContainer">
+    <div>
       <h1>Submit Budget Request</h1>
-      <form
-        id="budgetForm"
-        encType="multipart/form-data"
-        onSubmit={(e) => e.preventDefault()}
-      >
-        <div>
-          <label htmlFor="departmentId">부서 ID :</label>
-          <input
-            type="number"
-            id="departmentId"
-            name="departmentId"
-            value={departmentId}
-            onChange={(e) => setDepartmentId(e.target.value)}
-          />
-        </div>
+      <div>
+        <label htmlFor="departmentId">부서 ID :</label>
+        <input
+          type="number"
+          id="departmentId"
+          value={departmentId}
+          onChange={(e) => setDepartmentId(e.target.value)}
+        />
+      </div>
 
-        <h2>예산 </h2>
-        <div id="budgetItemsContainer">
-          {budgetItems.map((item, index) => (
-            <div key={index}>
-              <label>제목 :</label>
+      <h2>Budget Items</h2>
+      <div id="budgetItemsContainer">
+        {budgetItems.map((item, index) => (
+          <div key={index}>
+            <div>
+              <label>세목 :</label>
               <input
                 type="text"
-                className="category"
                 value={item.category}
                 onChange={(e) =>
                   handleBudgetItemChange(index, "category", e.target.value)
@@ -93,7 +115,6 @@ export default function BudgetRequest() {
               <label>항목 :</label>
               <input
                 type="text"
-                className="subcategory"
                 value={item.subcategory}
                 onChange={(e) =>
                   handleBudgetItemChange(index, "subcategory", e.target.value)
@@ -102,7 +123,6 @@ export default function BudgetRequest() {
               <label>예산금액 :</label>
               <input
                 type="number"
-                className="allocated_amount"
                 value={item.allocated_amount}
                 onChange={(e) =>
                   handleBudgetItemChange(
@@ -115,7 +135,6 @@ export default function BudgetRequest() {
               <label>집행내역 :</label>
               <input
                 type="number"
-                className="executed_amount"
                 value={item.executed_amount}
                 onChange={(e) =>
                   handleBudgetItemChange(
@@ -132,27 +151,28 @@ export default function BudgetRequest() {
                 Remove
               </button>
             </div>
-          ))}
-        </div>
-        <button type="button" onClick={handleAddBudgetItem}>
-          Add Budget Item
-        </button>
+          </div>
+        ))}
+      </div>
+      <button type="button" onClick={handleAddBudgetItem}>
+        Add Budget Item
+      </button>
 
-        <div>
-          <label htmlFor="documentFile">File:</label>
-          <input
-            type="file"
-            id="documentFile"
-            name="documentFile"
-            multiple
-            onChange={handleFileChange}
-          />
-        </div>
+      <div>
+        <label htmlFor="documentFile">File:</label>
+        <input
+          type="file"
+          id="documentFile"
+          multiple
+          onChange={handleFileChange}
+        />
+      </div>
 
-        <button type="button" onClick={handleSubmit}>
-          Submit
-        </button>
-      </form>
+      <button type="button" onClick={handleSubmit}>
+        Submit
+      </button>
     </div>
   );
-}
+};
+
+export default BudgetRequest;

@@ -36,7 +36,7 @@ export default function Contract() {
   const onClickContract = () => {
     axios
       .get(
-        `http://172.30.74.3:5000/findContract_number?contract_number=${number}`,
+        `http://172.30.104.63:5000/findContract_number?contract_number=${number}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export default function Contract() {
           setIsValid(true);
           axios
             .get(
-              `http://172.30.74.3:5000/inquiryContract?contract_number=${number}`,
+              `http://172.30.104.63:5000/inquiryContract?contract_number=${number}`,
               {
                 headers: {
                   "Content-Type": "application/json",

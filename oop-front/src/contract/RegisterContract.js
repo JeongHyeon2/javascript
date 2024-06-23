@@ -49,7 +49,7 @@ export default function RegisterContract() {
     console.log("Sending data:", formData);
 
     axios
-      .post(`http://172.30.74.3:5000/writeContract`, formData, {
+      .post(`http://172.30.104.63:5000/writeContract`, formData, {
         headers: {
           "Content-Type": "application/json",
         },

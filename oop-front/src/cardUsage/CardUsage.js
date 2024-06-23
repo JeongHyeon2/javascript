@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./CardUsage.css";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
@@ -26,30 +26,28 @@ export default function CardUsage() {
     },
   ];
 
+  const [keyword, setKeyword] = useState("");
   const [data, setData] = useState(initialData);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
-  useEffect(() => {
-    // Uncomment and modify the following axios calls as per your requirements.
-    // axios
-    //   .post("http://172.30.104.63:5000/addExecutionDetail", data)
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
-    // axios
-    //   .get("http://172.30.104.63:5000/getExecutionDetails")
-    //   .then((res) => {
-    //     console.log(res);
-    //     setData(res.data); // Set the fetched data
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
-  }, []);
+  const onClick = () => {
+    const params = {
+      startDate: startDate.toISOString().split("T")[0],
+      endDate: endDate.toISOString().split("T")[0],
+      keyword: keyword,
+    };
+
+    axios
+      .get("http://172.30.104.63:5000/getExecutionDetails", { params })
+      .then((res) => {
+        console.log(res);
+        setData(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   const ItemRow = ({ data }) => (
     <div className="row">
@@ -87,9 +85,14 @@ export default function CardUsage() {
       </div>
       <div className="inputBox">
         <div>키워드</div>
-        <input></input>
+        <input
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+        ></input>
       </div>
-      <div className="searchBox">검색</div>
+      <div className="searchBox" onClick={onClick}>
+        검색
+      </div>
       <div className="resultContainer">
         <div className="row">
           <div>id</div>

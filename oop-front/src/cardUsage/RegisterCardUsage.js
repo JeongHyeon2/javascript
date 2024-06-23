@@ -32,7 +32,7 @@ export default function RegisterCardUsage() {
     console.log("Sending data:", formData);
 
     axios
-      .post(`http://172.30.104.63:5000/createWorkExperience/}`, formData, {
+      .post(`http://172.30.104.63:5000/addExecutionDetail`, formData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -47,7 +47,7 @@ export default function RegisterCardUsage() {
 
   return (
     <div className="RegisterCardUsageContainer">
-      <h1>집행 세부 내역 등록</h1>
+      <h1> 내역 등록</h1>
       {inputFields.map((field, index) => (
         <div key={index} className="inputBox">
           <label>
