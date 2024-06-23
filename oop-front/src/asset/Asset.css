@@ -1,10 +1,61 @@
-.AssetContianer{
-    margin: 0 auto;
-    width: 800px;
-    height: 1200px;
-    border: 1px solid black;
+.AssetContainer {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .input-fields {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .input-fields input,
+  .input-fields button {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  .header {
+    display: flex;
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .header-cell {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    border-right: 1px solid #ccc;
+  }
+  
+  .header-cell:last-child {
+    border-right: none;
+  }
+  
+  .body {
     display: flex;
     flex-direction: column;
-    align-items: center;
-
-}
+  }
+  
+  .row {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .row:last-child {
+    border-bottom: none;
+  }
+  
+  .cell {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    border-right: 1px solid #eee;
+  }
+  
+  .cell:last-child {
+    border-right: none;
+  }
+  
